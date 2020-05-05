@@ -3,7 +3,7 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require("body-parser")
 const cors = require("cors")
-const log = require('./logs/logger')
+// const log = require('./logs/logger')
 const cookieParse = require('cookie-parser')
 
 // setting up global variables
@@ -15,6 +15,10 @@ var app = module.exports = express()
 
 // server static files
 app.use('/public', express.static(path.join(__dirname, 'public')))
+
+app.set('view engine', 'ejs')
+
+app.use('views', express.static(path.join(__dirname, 'views')))
 
 // allow cross origin
 app.use(cors());
@@ -36,7 +40,6 @@ app.use((req, res, next) => {
     const nvENV = process.env.NODE_ENV || 'development'
 
     // CONFIG = require('./config')
-    console.log(nvENV);
     CONFIG.BASE_URL = `https://${req.hostname}`
 
     next();
@@ -52,8 +55,7 @@ app.use((err, req, res, next) => {
 })
 
 app.use((req, res, next) => {
-    // res.status(404).render('error');
-    res.status(404).send("srroy Wrong URl");
+    res.status(400).render('error/404');
 })
 
 app.listen(3000, () => console.log(`Example app listening at http://localhost:3000`))

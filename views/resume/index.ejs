@@ -1,0 +1,211 @@
+<section class="page-title page-title-overlay bg-cover"
+    data-background=http://demo.themefisher.com/agico-hugo/images/background/about.jpg>
+    <div class=container>
+        <div class=row>
+            <div class=col-lg-7>
+                <h1 class="text-white position-relative">Find Job<span class=watermark-sm>Find</span></h1>
+                <p class="text-white pt-4 pb-4">Looking for a job upload Your resume here</p>
+            </div>
+            <div class="col-lg-3 ml-auto align-self-end">
+                <nav class="position-relative zindex-1" aria-label=breadcrumb>
+                    <ol class="breadcrumb justify-content-end bg-transparent">
+                        <li class=breadcrumb-item><a href='/' class=text-white>Home</a></li>
+                        <li class="breadcrumb-item text-white" aria-current=page>About Us</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section section-lg-bottom bg-light">
+    <div class=container>
+        <div class=row>
+            <div class="col-lg-12 text-center">
+                <p class=subtitle>Upload Your Reumse Here</p>
+                <h3 class=section-title id="section-title">Step 1</h3>
+            </div>
+            <div class="col-lg-12 text-center p-0">
+                <form method='POST' class='row' id="entry_form">
+                    <div class='col-lg-4 ' id="email-box">
+                        <input type="email" id="nxc-email" name="email" class="form-control mb-4" placeholder="Email"
+                            required>
+                    </div>
+                    <div class='col-lg-4 ' id="mobile-box">
+                        <input type="number" name="mobile" class="form-control mb-4" placeholder="Mobile" required
+                            size="2">
+                    </div>
+                    <div class='col-lg-4 ' id="btn-box">
+                        <button type=submit class="btn btn-primary" id="send_email">Submit Now</button>
+                    </div>
+                </form>
+                <form method='POST' class='row' id="otp_form" style="display: none;">
+                    <div class="col-lg-12">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>OTP Has Been Sent To Yout Email! </strong> Checkout Out Your mailbox.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class='col-lg-6'>
+                        <input type="number" name="otp" class="form-control mb-4" placeholder="Enter OTP" required>
+                    </div>
+                    <div class='col-lg-6 '>
+                        <button type=submit class="btn btn-primary" id="send_email">Submit Now</button>
+                    </div>
+                </form>
+                <form class='row' id="data_form" method="POST" style="display: none;" enctype="multipart/form-data">
+                    <div class='col-lg-4 '>
+                        <input type=text name="crr_desi" class="form-control mb-4" placeholder="Current Designation"
+                            required>
+                    </div>
+                    <div class='col-lg-4 '>
+                        <input type="number" name="crr_sal" class="form-control mb-4" placeholder="Current Salary"
+                            required>
+                    </div>
+                    <div class='col-lg-4 '>
+                        <input type='number' name="tot_exp" class="form-control mb-4"
+                            placeholder="Total Expericence (years)" required>
+                    </div>
+                    <div class='col-lg-4 '>
+                        <input type='text' name="crr_loc" class="form-control mb-4" placeholder="Current Location"
+                            required>
+                    </div>
+                    <div class='col-lg-4 '>
+                        <input type='text ' name="exp_loc" class="form-control mb-4" placeholder="Expected Location"
+                            required>
+                    </div>
+                    <div class='col-lg-4 '>
+                        <input type='number' name="exp_ctc" class="form-control mb-4" placeholder="Expected CTC (LPA)"
+                            required>
+                    </div>
+                    <div class='col-lg-4 '>
+                        <input type='text' name="deptt" class="form-control mb-4" placeholder="Department" required>
+                    </div>
+                    <div class='col-lg-4 '>
+                        <input type='text' name="skills" class="form-control mb-4" placeholder="Skills" required></div>
+                    <div class='col-lg-4 custom-control'>
+                        <input type="file" style="padding-top: 15px;" class="form-control mb-4" name="file" required
+                            accept=".docx,.rtf,.pdf,doc," />
+                    </div>
+                    <div class='col-lg-12 '>
+                        <button type='submit' class="btn btn-primary" id="upload_resume">Submit Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script defer>
+    document.body.onload = function () {
+        // FilePond.create(
+        //     document.querySelector('.filepond'),
+        // );
+        // $('.filepond').filepond('addFile', 'index.html').then(function (file) {
+        //     console.log('file added', file);
+        // });
+
+
+
+        $('#entry_form').submit(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let data = $(this).serializeArray();
+            data.push({ name: 'step', value: 1 });
+            $.ajax({
+                type: 'POST',
+                url: 'resume',
+                data: data,
+                beforeSend: function () {
+                    $('.preloader').show();
+                },
+                complete: function () {
+                    $('.preloader').hide();
+                },
+                success: function (result) {
+                    if (result.status == 200) {
+                        step122();
+                    } else alert(result.message);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+
+        $('#otp_form').submit(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            let data = $(this).serializeArray();
+            data.push({ name: 'step', value: 2 });
+            data.push({ name: 'email', value: $('#nxc-email').val() })
+            $.ajax({
+                type: 'POST',
+                url: 'resume',
+                data: data,
+                beforeSend: function () {
+                    $('.preloader').show();
+                },
+                complete: function () {
+                    $('.preloader').hide();
+                },
+                success: function (result) {
+                    if (result.status == 200) {
+                        step223();
+                    } else alert(result.message);
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+        });
+
+        $('#data_form').submit(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            let data = $(this).serializeArray();
+            data.push({ name: 'step', value: 3 });
+            data.push({ name: 'email', value: $('#nxc-email').val() || "aaa" });
+            // data.push({ name: 'file', value: $('input[name=file]').prop('files')[0] })
+            var fromdata = new FormData()
+            $.ajax({
+                type: 'POST',
+                url: 'resume',
+                data: data,
+                beforeSend: function () {
+                    $('.preloader').show();
+                },
+                complete: function () {
+                    $('.preloader').hide();
+                },
+                success: function (result) {
+                    if (result.status == 200) {
+                        step321();
+                        alert(result.message)
+                    } else alert(result.message);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+        });
+
+        function step122() {
+            $('#section-title').text("Step 2")
+            $('#entry_form').hide();
+            $('#otp_form').show();
+        }
+        function step223() {
+            $('#section-title').text("Step 2 Finish Now")
+            $('#otp_form').hide();
+            $('#data_form').show();
+        }
+        function step321() {
+            $('#section-title').text("Step 1 ")
+            $('#data_form').hide();
+            $('#entry_form').show();
+        }
+
+    }
+</script>
