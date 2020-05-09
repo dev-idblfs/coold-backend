@@ -25,7 +25,7 @@
                 <h3 class=section-title id="section-title">Step 1</h3>
             </div>
             <div class="col-lg-12 text-center p-0">
-                <form method='POST' class='row' id="entry_form">
+                <!-- <form method='POST' class='row' id="entry_form">
                     <div class='col-lg-4 ' id="email-box">
                         <input type="email" id="nxc-email" name="email" class="form-control mb-4" placeholder="Email"
                             required>
@@ -53,8 +53,8 @@
                     <div class='col-lg-6 '>
                         <button type=submit class="btn btn-primary" id="send_email">Submit Now</button>
                     </div>
-                </form>
-                <form class='row' id="data_form" method="POST" style="display: none;" enctype="multipart/form-data">
+                </form> -->
+                <form class='row' id="data_form" method="POST" style="display: nne;" enctype="multipart/form-data">
                     <div class='col-lg-4 '>
                         <input type=text name="crr_desi" class="form-control mb-4" placeholder="Current Designation"
                             required>
@@ -164,15 +164,16 @@
         $('#data_form').submit(function (e) {
             e.preventDefault();
             e.stopPropagation();
-            let data = $(this).serializeArray();
-            data.push({ name: 'step', value: 3 });
-            data.push({ name: 'email', value: $('#nxc-email').val() || "aaa" });
-            // data.push({ name: 'file', value: $('input[name=file]').prop('files')[0] })
-            var fromdata = new FormData()
+            let data = $('#data_form');
+            var fromdata = new FormData(data[0])
+            formdata.append('step', 3);
+            formdata.append('email', $('#nxc-email').val());
             $.ajax({
                 type: 'POST',
-                url: 'resume',
-                data: data,
+                url: 'upload',
+                data: fromdata,
+                processData: false,
+                contentType: false,
                 beforeSend: function () {
                     $('.preloader').show();
                 },
