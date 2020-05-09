@@ -2,6 +2,57 @@ var express = require("express"),
     router = express.Router();
 var path = require('path')
 var ejs = require('ejs');
+const multer = require('multer')
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'public')
+    },
+    filename: function (req, file, cb) {
+        console.log(file);
+        cb(null, Date.now() + '-' + file.originalname)
+    }
+})
+
+var upload = multer({ storage: storage }).single('file')
+
+const mail = (email, code) => {
+    return new Promise(async (resolve, reject) => {
+        const options = {
+            method: 'POST',
+            uri: 'https://idblfs-email-sending.herokuapp.com/sendmail',
+            body: {
+                from: "Onxcy <no-reply@onxcy.com>",
+                to: email,
+                subject: "Onxcy - Verify Email",
+                body_html: `Hey ${email.split('@')[0]}!</br></br>
+    
+                <strong>Verify your email - Just one more step!</strong>
+                <br><br>
+                We’re on a mission to let you make chat bots and make your working life simpler, more pleasant and more productive. This should be easy.
+                <br><br>
+                To get started, first you need to verify the email address 
+                <br><br>
+                enter this Verification code on the Verification Page ${code}
+                <br><br>
+                <br><br>
+                
+                Thanks,
+                Onxcy Team`
+            },
+            json: true,
+        }
+        request(options).then((body) => {
+            if (body) {
+                console.log(body);
+                resolve({ status: 200, message: body })
+            }
+        }).catch((err) => {
+            reject({ status: 304, message: "Please try Again" })
+        });
+    });
+
+}
 
 const _loadJS = () => {
     let js = {
@@ -15,7 +66,6 @@ const _loadJS = () => {
         h: "public/js/search.js",
         i: "public/js/ddj.js",
         j: "public/js/script.min.js",
-        k: "https://unpkg.com/filepond/dist/filepond.js",
         brandIcon: 'public/images/icon/icon.png'
     }
     return js;
@@ -29,7 +79,6 @@ const _loadCSS = () => {
         d: "public/scss/venobox.css",
         e: "public/scss/ddj.css",
         f: "public/scss/style.min.css",
-        g: 'https://unpkg.com/filepond/dist/filepond.css',
         brandIcon: 'public/images/icon/icon.png',
         loader: 'public/images/preloader.gif'
     }
@@ -120,11 +169,18 @@ router.post("/resume", async (req, res) => {
                 if (result.status == 200) {
                     return res.send({ status: 200, message: "Thankyou For Subbmitted" });
                 }
-                // console.log(params.file);
-                // var s3 = require(ROOT_DIR + "/utils/s3.js")
-
-                // // s3.putObject()
-                // res.send({ status: 200, message: "Thankyou For Subbmitted" });
+                // upload(req, res, async (err) => {
+                //     if (err instanceof multer.MulterError) {
+                //         return res.status(500).send(err)
+                //     } else if (err) {
+                //         return res.status(500).send(err)
+                //     }
+                //     console.log(req.file);
+                //     var result = await s3.putObject(res.file, req.file.filename);
+                //     if (result.body == 200) {
+                //         result
+                //     }
+                // })
             }
         } catch (error) {
             result = error;
@@ -133,43 +189,5 @@ router.post("/resume", async (req, res) => {
 
     }
 })
-
-const mail = (email, code) => {
-    return new Promise(async (resolve, reject) => {
-        const options = {
-            method: 'POST',
-            uri: 'https://idblfs-email-sending.herokuapp.com/sendmail',
-            body: {
-                from: "Onxcy <no-reply@onxcy.com>",
-                to: email,
-                subject: "Onxcy - Verify Email",
-                body_html: `Hey ${email.split('@')[0]}!</br></br>
-    
-                <strong>Verify your email - Just one more step!</strong>
-                <br><br>
-                We’re on a mission to let you make chat bots and make your working life simpler, more pleasant and more productive. This should be easy.
-                <br><br>
-                To get started, first you need to verify the email address 
-                <br><br>
-                enter this Verification code on the Verification Page ${code}
-                <br><br>
-                <br><br>
-                
-                Thanks,
-                Onxcy Team`
-            },
-            json: true,
-        }
-        request(options).then((body) => {
-            if (body) {
-                console.log(body);
-                resolve({ status: 200, message: body })
-            }
-        }).catch((err) => {
-            reject({ status: 304, message: "Please try Again" })
-        });
-    });
-
-}
 
 module.exports = router;
