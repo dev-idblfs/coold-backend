@@ -109,6 +109,7 @@ router.get("/service", async function (req, res) {
     res.render('body', { header: header, body: body, footer: footer });
 
 })
+
 router.get("/contact", async function (req, res) {
     var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
     var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
@@ -188,6 +189,21 @@ router.post("/resume", async (req, res) => {
         }
 
     }
+})
+
+const services = ['hr', 'payroll', 'performance', 'recruit', 'timesheet'];
+
+router.get("/:service", async function (req, res, next) {
+    if (Object.keys(req.params).length > 0 && services.includes(req.params.service)) {
+        var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
+        var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+        var body = await ejs.renderFile('views/service/aio-index.ejs');
+
+        res.render('body', { header: header, body: body, footer: footer });
+    } else {
+        next();
+    }
+
 })
 
 module.exports = router;

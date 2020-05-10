@@ -89,7 +89,7 @@
     $(document).ready(function () {
         $("a[href]").click(function (e) {
             // e.preventDefault();
-            // console.log(e);
+            // console.log($(this).attr('href'));
             if (!$(this).attr('href')) { alert(); return !1 }
             else { $.ajax({ url: '/app/' + $(this).attr('href'), success: function (result) { console.log(result) } }) }
         })
