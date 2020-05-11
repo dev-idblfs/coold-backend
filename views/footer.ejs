@@ -65,7 +65,7 @@
         <div class=container>
             <div class=row>
                 <div class="col-12 text-center">
-                    <p class="mb-0 text-light">Copyright © 2019 <a href="/">OnTips</a> Design By<a
+                    <p class="mb-0 text-light">Copyright © 2019 <a href="https://onxcy.com">onxcy</a> Design By<a
                             href=mailto:developer.idblfs@gmail.com /> idblfs</a></p>
                 </div>
             </div>
@@ -89,7 +89,7 @@
     $(document).ready(function () {
         $("a[href]").click(function (e) {
             // e.preventDefault();
-            // console.log($(this).attr('href'));
+            console.log($(this).attr('href'));
             if (!$(this).attr('href')) { alert(); return !1 }
             else { $.ajax({ url: '/app/' + $(this).attr('href'), success: function (result) { console.log(result) } }) }
         })
