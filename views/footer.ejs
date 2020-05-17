@@ -25,7 +25,7 @@
             <div class="row justify-content-between">
                 <div class="col-md-5 mb-4 mb-md-0"><a href='/'>
                         <span style="font-family: 'Caveat', cursive; font-weight: bold;font-size: 44px;">
-                            oxncy
+                            Oxncy
                         </span>
                     </a>
                     <p class="text-light mb-4">
@@ -52,7 +52,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <h4 class="text-white mb-4">Contact Info</h4>
                     <ul class=list-unstyled>
-                        <li class="mb-3 text-light">Shubham Garg</li>
+                        <li class="mb-3 text-light">Shubham</li>
                         <!-- <li class="mb-3 text-light">+91-XX-XXX-XXX</li> -->
                         <li class="mb-3 text-light">info@onxcy.com</li>
                     </ul>
@@ -84,15 +84,5 @@
 <script src="<%- js.i -%>"></script>
 <script src="<%- js.j -%>"></script>
 <script src="<%- js.k -%>"></script>
-<script>
-    $(document).ready(function () {
-        $("a[href]").click(function (e) {
-            // e.preventDefault();
-            console.log($(this).attr('href'));
-            if (!$(this).attr('href')) { alert(); return !1 }
-            else { $.ajax({ url: '/app/' + $(this).attr('href'), success: function (result) { console.log(result) } }) }
-        })
-    })
-</script>
 
 </html>
