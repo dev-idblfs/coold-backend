@@ -1,8 +1,11 @@
-var express = require("express"),
+const express = require("express"),
     router = express.Router();
-var path = require('path')
+const path = require('path')
 var ejs = require('ejs');
-const multer = require('multer')
+const resume = require(ROOT_DIR + '/modals/resumes');
+const s3 = require(ROOT_DIR + '/utils/s3')
+const request = require('request-promise');
+const multer = require('multer');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -129,10 +132,10 @@ router.get("/resume", async function (req, res) {
 })
 
 router.post("/resume", async (req, res) => {
-    if (Object.keys(req.body).length > 0) {
-        let params = req.body;
-        console.log(req.files);
-        try {
+    try {
+        if (Object.keys(req.body).length > 0) {
+            let params = req.body;
+            console.log(params);
             if (params.email && params.step && params.step == 1) {
                 delete params.step;
                 isfound = await resume.fetch({ email: params.email })
@@ -160,34 +163,43 @@ router.post("/resume", async (req, res) => {
                 } else {
                     return res.send({ status: 200, message: "Wrong OTP Entered" });
                 }
-            } else if (params.email && params.step && params.step == 3) {
-                delete params.step;
-                filter = {
-                    email: params.email
-                }
-                let list = await resume.fetch(filter)
-                result = await resume.update(params, { _id: list.body[0]._id });
-                if (result.status == 200) {
-                    return res.send({ status: 200, message: "Thankyou For Subbmitted" });
-                }
-                // upload(req, res, async (err) => {
-                //     if (err instanceof multer.MulterError) {
-                //         return res.status(500).send(err)
-                //     } else if (err) {
-                //         return res.status(500).send(err)
-                //     }
-                //     console.log(req.file);
-                //     var result = await s3.putObject(res.file, req.file.filename);
-                //     if (result.body == 200) {
-                //         result
-                //     }
-                // })
             }
-        } catch (error) {
-            result = error;
-            res.send({ status: 304, message: "plases try again" });
+        } else {
+            upload(req, res, async (err) => {
+                if (err instanceof multer.MulterError) {
+                    return res.status(500).send(err)
+                } else if (err) {
+                    return res.status(500).send(err)
+                }
+                let params = req.body;
+                if (params.email && params.step && params.step == 3) {
+                    delete params.step;
+                    filter = {
+                        email: params.email
+                    }
+                    // setting file for upload resume for unqiue identification
+                    // append email
+                    let filename = `${params.email}-${req.file.filename}`
+                    var result = await s3.putObject(res.file, filename);
+                    if (result.status == 200) {
+                        let list = await resume.fetch(filter)
+                        params.filename = filename;
+                        result = await resume.update(params, { _id: list.body[0]._id });
+                        if (result.status == 200) {
+                            return res.send({ status: 200, message: "Thankyou For Subbmitted" });
+                        }
+                    } else {
+                        return res.send({ status: 500, message: "Unable to upload Your resume" });
+                    }
+                } else {
+                    return res.send({ status: 500, message: "Email Not Found" });
+                }
+            })
         }
-
+    } catch (error) {
+        result = error;
+        console.log(result);
+        res.send({ status: 304, message: "plases try again" });
     }
 })
 
@@ -210,6 +222,7 @@ router.get("/:service", async function (req, res, next) {
         // console.log(services.indexOf(req.params.service));
         res.render('body', { header: header, body: body, footer: footer });
     } else {
+        console.log('here run');
         next();
     }
 

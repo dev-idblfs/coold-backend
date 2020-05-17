@@ -2,8 +2,8 @@ var AWS = require('aws-sdk');
 
 const BUCKET = 'onxcy'
 const REGION = 'us-east-2'
-const ACCESS_KEY = 'AKIAJGE6FO6C5YQM5C4A'
-const SECRET_KEY = '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'
+const ACCESS_KEY = 'AKIAIDOEAAONJ3IVHWLQ'
+const SECRET_KEY = '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'
 
 // Set the region 
 AWS.config.update({
@@ -27,10 +27,10 @@ const putObject = (file, filename) => {
             console.log(
                 `The URL is ${s3.getSignedUrl('getObject', { Bucket: BUCKET, Key: filename })}`
             )
-            resolve({ status: 200, Body: response });
+            resolve({ status: 200, body: response });
         }).catch(err => {
             console.log('failed:', err)
-            reject({ status: 404, Body: err });
+            reject({ status: 404, body: err });
         });
     });
 };

@@ -164,13 +164,13 @@
             e.preventDefault();
             e.stopPropagation();
             let data = $('#data_form');
-            var fromdata = new FormData(data[0])
+            var formdata = new FormData(data[0])
             formdata.append('step', 3);
             formdata.append('email', $('#nxc-email').val());
             $.ajax({
                 type: 'POST',
-                url: 'upload',
-                data: fromdata,
+                url: 'resume',
+                data: formdata,
                 processData: false,
                 contentType: false,
                 beforeSend: function () {
@@ -205,6 +205,7 @@
             $('#section-title').text("Step 1 ")
             $('#data_form').hide();
             $('#entry_form').show();
+            $('#entry_form, #data_form, #otp_form').trigger('reset');
         }
 
     }
