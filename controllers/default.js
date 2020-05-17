@@ -191,6 +191,15 @@ router.post("/resume", async (req, res) => {
     }
 })
 
+router.get("/policy", async function (req, res) {
+    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
+    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+    var body = await ejs.renderFile('views/policy/index.ejs');
+
+    res.render('body', { header: header, body: body, footer: footer });
+
+})
+
 const services = ['hr', 'payroll', 'performance', 'recruit', 'timesheet'];
 
 router.get("/:service", async function (req, res, next) {
