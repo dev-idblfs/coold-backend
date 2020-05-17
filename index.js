@@ -58,4 +58,4 @@ app.use((req, res, next) => {
     res.status(400).render('error/404');
 })
 
-app.listen(80, () => console.log(`Example app listening at http://localhost:3000`))
+app.listen(3000, () => console.log(`Example app listening at http://localhost:3000`))
