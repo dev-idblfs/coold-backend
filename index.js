@@ -40,6 +40,7 @@ app.use((req, res, next) => {
     const nvENV = process.env.NODE_ENV || 'development'
 
     // CONFIG = require('./config')
+    console.log(nvENV);
     CONFIG.BASE_URL = `https://${req.hostname}`
 
     next();
@@ -58,4 +59,4 @@ app.use((req, res, next) => {
     res.status(400).render('error/404');
 })
 
-app.listen(3000, () => console.log(`Example app listening at http://localhost:3000`))
+app.listen(process.env.PORT, () => console.log(`Example app listening at ${CONFIG.BASE_URL}${process.env.PORT}`))
