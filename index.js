@@ -4,8 +4,7 @@ const path = require('path')
 const bodyParser = require("body-parser")
 const cors = require("cors")
 // const log = require('./logs/logger')
-const cookieParse = require('cookie-parser');
-const robots = require('express-robots-txt');
+const cookieParse = require('cookie-parser')
 
 // setting up global variables
 global.ROOT_DIR = path.resolve(__dirname);
@@ -16,9 +15,6 @@ var app = module.exports = express()
 
 // server static files
 app.use('/public', express.static(path.join(__dirname, 'public')))
-
-// setting up robot.txt
-app.use(robots({UserAgent: '*', Disallow: '/public/'}))
 
 app.set('view engine', 'ejs')
 
@@ -54,7 +50,7 @@ app.use(require('./config/routes'));
 
 app.use((err, req, res, next) => {
 
-    console.log(err);
+    console.lg(err);
     // res.status(500).render('error');
     res.send(500)
 })
@@ -63,4 +59,4 @@ app.use((req, res, next) => {
     res.status(400).render('error/404');
 })
 
-app.listen(3000, () => console.log(`Example app listening at ${CONFIG.BASE_URL}${process.env.PORT}`))
+app.listen(process.env.PORT, () => console.log(`Example app listening at ${CONFIG.BASE_URL}${process.env.PORT}`))

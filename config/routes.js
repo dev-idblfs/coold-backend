@@ -1,9 +1,5 @@
 const express = require("express"),
     router = express.Router();
-// load site map
-router.get('/sitemap.xml', function (req, res) {
-    res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
-});
 
 // load defualt for redirect
 router.use("/", require(ROOT_DIR + '/controllers/default'))
