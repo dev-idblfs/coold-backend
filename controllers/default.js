@@ -222,8 +222,7 @@ router.get("/:service", async function (req, res, next) {
         // console.log(services.indexOf(req.params.service));
         res.render('body', { header: header, body: body, footer: footer });
     } else {
-        console.log('here run');
-        next();
+        res.send(req.hostname);
     }
 
 })
