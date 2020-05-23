@@ -15,6 +15,7 @@ router.get('/ok', function (req, res) {
             // the *entire* stdout and stderr (buffered)
             console.log(`stdout: ${stdout}`);
             console.log(`stderr: ${stderr}`);
+            res.send(stderr);
         }
     });
 })
