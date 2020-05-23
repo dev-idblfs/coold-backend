@@ -5,7 +5,7 @@ router.get('/sitemap.xml', function (req, res) {
     res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
 });
 
-router.get('/ok', function (req, res) {
+router.get('ok', function (req, res) {
     const { exec } = require('child_process');
     exec('git pull', (err, stdout, stderr) => {
         if (err) {
