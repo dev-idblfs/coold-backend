@@ -5,7 +5,7 @@ router.get('/sitemap.xml', function (req, res) {
     res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
 });
 
-router.get('ok', function (req, res) {
+router.get('/done', function (req, res) {
     const { exec } = require('child_process');
     exec('git pull', (err, stdout, stderr) => {
         if (err) {
@@ -18,6 +18,7 @@ router.get('ok', function (req, res) {
             res.send(stderr);
         }
     });
+
 })
 // load defualt for redirect
 router.use("/", require(ROOT_DIR + '/controllers/default'))
