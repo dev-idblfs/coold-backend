@@ -5,7 +5,7 @@ router.get('/sitemap.xml', function (req, res) {
     res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
 });
 
-router.get('/done', (req, res) => {
+router.post('/done', (req, res) => {
     const { spawn } = require('child_process');
     const bat = spawn('cmd.exe', ['/c', 'bat.sh']);
     var output = '';
