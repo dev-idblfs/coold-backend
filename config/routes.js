@@ -16,7 +16,7 @@ router.post('/done', async (req, res) => {
 
     bat.stderr.on('data', (data) => {
         console.error(data.toString());
-        // console.log('hello');
+        console.log('hello');
         res.end(data);
     });
 
@@ -24,7 +24,7 @@ router.post('/done', async (req, res) => {
         console.log(`Child exited with code ${code}`);
         res.send(output || "ok");
     });
-    res.send(req.body);
+    //res.send(req.body);
 })
 // load defualt for redirect
 router.use("/", require(ROOT_DIR + '/controllers/default'))
