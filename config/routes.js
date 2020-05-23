@@ -5,32 +5,22 @@ router.get('/sitemap.xml', function (req, res) {
     res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
 });
 
-router.get('/done', function (req, res) {
+router.get('/done', (req, res) => {
     const { spawn } = require('child_process');
-    const child = spawn('git pull');
-    // use child.stdout.setEncoding('utf8'); if you want text chunks
-    child.stdout.on('data', (chunk) => {
-        res.send(chunk);
-        // data from the standard output is here as buffers
+    const bat = spawn('cmd.exe', ['/c', 'bat.bat']);
+    var resp;
+    bat.stdout.on('data', (data) => {
+        console.log(data.toString());
     });
-    // since these are streams, you can pipe them elsewhere
-    child.stderr.pipe(dest);
-    child.on('close', (code) => {
-        console.log(`child process exited with code ${code}`);
-        res.send(code);
-    });
-    // exec('git pull', (err, stdout, stderr) => {
-    //     if (err) {
-    //         //some err occurred
-    //         console.error(err)
-    //     } else {
-    //         // the *entire* stdout and stderr (buffered)
-    //         console.log(`stdout: ${stdout}`);
-    //         console.log(`stderr: ${stderr}`);
-    //         res.send(stderr);
-    //     }
-    // });
 
+    bat.stderr.on('data', (data) => {
+        console.error(data.toString());
+    });
+
+    bat.on('exit', (code) => {
+        console.log(`Child exited with code ${code}`);
+    });
+    res.send('ok');
 })
 // load defualt for redirect
 router.use("/", require(ROOT_DIR + '/controllers/default'))
