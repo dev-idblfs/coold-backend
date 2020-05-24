@@ -6,6 +6,7 @@ router.get('/sitemap.xml', function (req, res) {
 });
 
 router.get('/done', (req, res) => {
+    
     const { spawn } = require('child_process');
     const bat = spawn('cmd.exe', ['/c', 'bat.sh']);
     var output = '';
