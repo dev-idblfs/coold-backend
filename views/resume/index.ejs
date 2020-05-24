@@ -20,7 +20,7 @@
     <div class=container>
         <div class=row>
             <div class="col-lg-12 text-center">
-                <p class=subtitle>Upload Your Reumse Here</p>
+                <p class=subtitle>Upload Your Resume Here</p>
                 <h3 class=section-title id="section-title">Step 1</h3>
             </div>
             <div class="col-lg-12 text-center p-0">
@@ -96,6 +96,20 @@
     </div>
 </section>
 <script defer>
+    function customlaert(code, mesage) {
+        if (code == 200) {
+            var icon = 'success'
+        } else {
+            var icon = 'error'
+        }
+        swal({
+            title: icon,
+            text: mesage,
+            icon: icon,
+            button: false,
+            timer: 1000
+        })
+    }
     document.body.onload = function () {
         // FilePond.create(
         //     document.querySelector('.filepond'),
@@ -103,7 +117,6 @@
         // $('.filepond').filepond('addFile', 'index.html').then(function (file) {
         //     console.log('file added', file);
         // });
-
 
 
         $('#entry_form').submit(function (event) {
@@ -124,7 +137,7 @@
                 success: function (result) {
                     if (result.status == 200) {
                         step122();
-                    } else alert(result.message);
+                    } else customlaert(result.status, result.message);
                 },
                 error: function (error) {
                     console.log(error);
@@ -150,12 +163,14 @@
                 },
                 success: function (result) {
                     if (result.status == 200) {
+                        alert();
+                        customlaert(result.status, result.message);
                         step223();
-                    } else alert(result.message);
+                    } else customlaert(result.status, result.message);
 
                 },
                 error: function (error) {
-                    alert(error.message);
+                    customlaert(error.status, error.message);
                 }
             });
         });
@@ -182,11 +197,11 @@
                 success: function (result) {
                     if (result.status == 200) {
                         step321();
-                        alert(result.message)
-                    } else alert(result.message);
+                        customlaert(result.status, result.message);
+                    } else customlaert(result.status, result.message);
                 },
                 error: function (error) {
-                    alert(error.message);
+                    customlaert(error.status, error.message);
                 }
             });
         });
