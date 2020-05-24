@@ -7,6 +7,7 @@ router.get('/sitemap.xml', (req, res) => {
 
 router.post('/done', async (req, res) => {
     console.log(req.body);
+    
     const { exec } = require('child_process');
     const bat = exec('bat.bat');
     var output = '';
