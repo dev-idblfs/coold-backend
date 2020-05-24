@@ -1,14 +1,13 @@
 const express = require("express"),
     router = express.Router();
-// load site map
-router.get('/sitemap.xml', function (req, res) {
+// load site map yo
+router.get('/sitemap.xml',  (req, res) => {
     res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
 });
 
-router.get('/done', (req, res) => {
-    
-    const { spawn } = require('child_process');
-    const bat = spawn('cmd.exe', ['/c', 'bat.sh']);
+router.post('/done', async (req, res) => {
+    const { exec } = require('child_process');
+    const bat = await exec('bat.sh');
     var output = '';
     bat.stdout.on('data', (data) => {
         console.log(data.toString());
@@ -17,7 +16,7 @@ router.get('/done', (req, res) => {
 
     bat.stderr.on('data', (data) => {
         console.error(data.toString());
-        // console.log('hello');
+        console.log('hello');
         res.end(data);
     });
 
@@ -25,7 +24,7 @@ router.get('/done', (req, res) => {
         console.log(`Child exited with code ${code}`);
         res.send(output || "ok");
     });
-
+    //res.send(req.body);
 })
 // load defualt for redirect
 router.use("/", require(ROOT_DIR + '/controllers/default'))
