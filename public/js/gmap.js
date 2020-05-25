@@ -189,12 +189,12 @@ function initialize() {
 	});
 	map.mapTypes.set('grey', mapType);
 	map.setMapTypeId('grey');
-	var marker_image = mapMarker;
-	var pinIcon = new google.maps.MarkerImage(marker_image, null, null, null, new google.maps.Size(46, 58));
+	// var marker_image = mapMarker;
+	// var pinIcon = new google.maps.MarkerImage(marker_image, null, null, null, new google.maps.Size(46, 58));
 	marker = new google.maps.Marker({
 		position: nottingham,
 		map: map,
-		icon: pinIcon,
+		// icon: pinIcon,
 		title: mapMarkerLabel
 	});
 }
