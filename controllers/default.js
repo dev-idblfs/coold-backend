@@ -25,23 +25,22 @@ const mail = (email, code) => {
             method: 'POST',
             uri: 'https://idblfs-email-sending.herokuapp.com/sendmail',
             body: {
-                from: "Onxcy <no-reply@onxcy.com>",
+                from: "Onxcy HR <hr@onxcy.com>",
                 to: email,
                 subject: "Onxcy - Verify Email",
-                body_html: `Hey ${email.split('@')[0]}!</br></br>
-    
-                <strong>Verify your email - Just one more step!</strong>
-                <br><br>
-                We’re on a mission to let you make chat bots and make your working life simpler, more pleasant and more productive. This should be easy.
-                <br><br>
-                To get started, first you need to verify the email address 
-                <br><br>
-                enter this Verification code on the Verification Page ${code}
-                <br><br>
-                <br><br>
-                
-                Thanks,
-                Onxcy Team`
+                body_html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                </head>
+                <body>
+                <p style="text-align: left;"><span style="font-family: georgia, palatino;">Hey <strong>${email.split('@')[0]}!</strong>,</span></p>
+                <p style="text-align: left;"><span style="font-family: georgia, palatino;">!<strong>Verify your email - Just one more step!</strong> </span><br /><br /><span style="font-family: georgia, palatino;">Kindly enter this "<strong>${code}</strong>" verification code to proceed further. </span></p>
+                <p style="text-align: left;"><span style="font-family: georgia, palatino;">We are on a mission of finding the best suitable option for job seekers, intern seekers &amp; freelancer and make your life simpler, more productive &amp; effective. This should be easy.</span><br /><br /><span style="font-family: georgia, palatino;">To get started, first, you need to verify the email address.&nbsp;</span></p>
+                <p style="text-align: left;"><br /><span style="font-family: georgia, palatino;">Thanks &amp; Regards,</span></p>
+                <p style="text-align: left;"><span style="font-family: georgia, palatino;">Onxcy HR&nbsp;</span></p>
+                </body>
+                </html>`
             },
             json: true,
         }
