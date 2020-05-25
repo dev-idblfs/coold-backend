@@ -30,8 +30,8 @@
                             required>
                     </div>
                     <div class='col-lg-4 ' id="mobile-box">
-                        <input type="number" name="mobile" class="form-control mb-4" placeholder="Mobile" required
-                            size="2">
+                        <input type="tel" name="mobile" class="form-control mb-4" placeholder="Mobile" required
+                            minlength="10" maxlength="10">
                     </div>
                     <div class='col-lg-4 ' id="btn-box">
                         <button type=submit class="btn btn-primary" id="send_email">Submit Now</button>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class='col-lg-6'>
-                        <input type="number" name="otp" class="form-control mb-4" placeholder="Enter OTP" required>
+                        <input type="tel" name="otp" class="form-control mb-4" placeholder="Enter OTP" required>
                     </div>
                     <div class='col-lg-6 '>
                         <button type=submit class="btn btn-primary" id="send_email">Submit Now</button>
@@ -59,11 +59,11 @@
                             required>
                     </div>
                     <div class='col-lg-4 '>
-                        <input type="number" name="crr_sal" class="form-control mb-4" placeholder="Current Salary"
+                        <input type="tel" name="crr_sal" class="form-control mb-4" placeholder="Current Salary"
                             required>
                     </div>
                     <div class='col-lg-4 '>
-                        <input type='number' name="tot_exp" class="form-control mb-4"
+                        <input type='tel' name="tot_exp" class="form-control mb-4"
                             placeholder="Total Expericence (years)" required>
                     </div>
                     <div class='col-lg-4 '>
@@ -75,7 +75,7 @@
                             required>
                     </div>
                     <div class='col-lg-4 '>
-                        <input type='number' name="exp_ctc" class="form-control mb-4" placeholder="Expected CTC (LPA)"
+                        <input type='tel' name="exp_ctc" class="form-control mb-4" placeholder="Expected CTC (LPA)"
                             required>
                     </div>
                     <div class='col-lg-4 '>
@@ -163,7 +163,6 @@
                 },
                 success: function (result) {
                     if (result.status == 200) {
-                        alert();
                         customlaert(result.status, result.message);
                         step223();
                     } else customlaert(result.status, result.message);
