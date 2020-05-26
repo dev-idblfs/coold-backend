@@ -88,24 +88,24 @@ const _loadCSS = () => {
 }
 // request to get all the users
 router.get("/", async function (req, res) {
-    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
-    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
+    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
     var body = await ejs.renderFile('views/index.ejs');
     res.render('body', { header: header, body: body, footer: footer });
 })
 
 // request to get all the users by userName
 router.get("/about", async function (req, res) {
-    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
-    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
+    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
     var body = await ejs.renderFile('views/about/index.ejs');
 
     res.render('body', { header: header, body: body, footer: footer });
 
 })
 router.get("/service", async function (req, res) {
-    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
-    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
+    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
     var body = await ejs.renderFile('views/service/index.ejs');
 
     res.render('body', { header: header, body: body, footer: footer });
@@ -113,8 +113,8 @@ router.get("/service", async function (req, res) {
 })
 
 router.get("/contact", async function (req, res) {
-    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
-    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
+    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
     var body = await ejs.renderFile('views/contact/index.ejs');
 
     res.render('body', { header: header, body: body, footer: footer });
@@ -122,8 +122,8 @@ router.get("/contact", async function (req, res) {
 })
 
 router.get("/resume", async function (req, res) {
-    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
-    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
+    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
     var body = await ejs.renderFile('views/resume/index.ejs');
 
     res.render('body', { header: header, body: body, footer: footer });
@@ -220,8 +220,8 @@ router.post("/resume", async (req, res) => {
 })
 
 router.get("/policy", async function (req, res) {
-    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
-    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+    var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
+    var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
     var body = await ejs.renderFile('views/policy/index.ejs');
 
     res.render('body', { header: header, body: body, footer: footer });
@@ -232,8 +232,8 @@ const services = ['hr', 'payroll', 'performance', 'recruit', 'timesheet'];
 
 router.get("/:service", async function (req, res, next) {
     if (Object.keys(req.params).length > 0 && services.includes(req.params.service)) {
-        var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS() });
-        var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS() });
+        var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
+        var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
         var body = await ejs.renderFile('views/service/aio-index.ejs', { index: services.indexOf(req.params.service) + 1 });
         // console.log(services.indexOf(req.params.service));
         res.render('body', { header: header, body: body, footer: footer });
