@@ -13,9 +13,9 @@ const insert = (params) => {
         MongoClient.connect(uri, option).then(async (db) => {
             var dbo = db.db(db_name);
             try {
-                const res = await dbo.collection(collection).insertOne(data);
+                const result = await dbo.collection(collection).insertOne(data);
                 console.log("enterd");
-                resolve({ status: 200, body: res.result })
+                resolve({ status: 200, body: result.result })
             } catch (err) {
                 console.log('not entered');
                 reject({ status: 500, error: err });

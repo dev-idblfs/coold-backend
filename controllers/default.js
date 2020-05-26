@@ -29,18 +29,18 @@ const mail = (email, code) => {
                 to: email,
                 subject: "Onxcy - Verify Email",
                 body_html: `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                </head>
-                <body>
-                <p style="text-align: left;"><span style="font-family: georgia, palatino;">Hey <strong>${email.split('@')[0]}!</strong>,</span></p>
-                <p style="text-align: left;"><span style="font-family: georgia, palatino;">!<strong>Verify your email - Just one more step!</strong> </span><br /><br /><span style="font-family: georgia, palatino;">Kindly enter this "<strong>${code}</strong>" verification code to proceed further. </span></p>
-                <p style="text-align: left;"><span style="font-family: georgia, palatino;">We are on a mission of finding the best suitable option for job seekers, intern seekers &amp; freelancer and make your life simpler, more productive &amp; effective. This should be easy.</span><br /><br /><span style="font-family: georgia, palatino;">To get started, first, you need to verify the email address.&nbsp;</span></p>
-                <p style="text-align: left;"><br /><span style="font-family: georgia, palatino;">Thanks &amp; Regards,</span></p>
-                <p style="text-align: left;"><span style="font-family: georgia, palatino;">Onxcy HR&nbsp;</span></p>
-                </body>
-                </html>`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                    </head>
+                    <body>
+                    <p style="text-align: left;"><span style="font-family: georgia, palatino;">Hey <strong>${email.split('@')[0]}!</strong>,</span></p><br/><br/><br/>
+                    <p style="text-align: left;"><span style="font-family: georgia, palatino;">!<strong>Verify your email - Just one more step!</strong> </span><br /><br /><span style="font-family: georgia, palatino;">Kindly enter this "<strong>${code}</strong>" verification code to proceed further. </span></p>
+                    <p style="text-align: left;"><span style="font-family: georgia, palatino;">We are on a mission of finding the best suitable option for job seekers, intern seekers &amp; freelancer and make your life simpler, more productive &amp; effective. This should be easy.</span><br /><br /><span style="font-family: georgia, palatino;">To get started, first, you need to verify the email address.&nbsp;</span></p>
+                    <p style="text-align: left;"><br /><span style="font-family: georgia, palatino;">Thanks &amp; Regards,</span></p>
+                    <p style="text-align: left;"><span style="font-family: georgia, palatino;">Onxcy HR&nbsp;</span></p>
+                    </body>
+                    </html>`
             },
             json: true,
         }
@@ -134,21 +134,35 @@ router.post("/resume", async (req, res) => {
     try {
         if (Object.keys(req.body).length > 0) {
             let params = req.body;
-            console.log(params);
             if (params.email && params.step && params.step == 1) {
+                if (['example@domain.com'].includes(params.email)) {
+                    return res.send({ status: 200, message: "Verification mail has been sent to your Email" })
+                }
                 delete params.step;
                 isfound = await resume.fetch({ email: params.email })
                 if (isfound.body.length > 0) {
                     return res.send({ status: 304, message: "Email Already Exists" });;
                 }
                 params.isVerified = 0;
+                // generatting otp for verification
                 params.otp = Math.floor(100000 + Math.random() * 900000);
+                // sending mail using API
                 await mail(params.email, params.otp);
+
                 result = await resume.insert(params);
+
                 if (result.status == 200) {
-                    res.send({ status: 200, message: "Varify Your Email" });
-                } else res.send({ status: 200, message: "not Inserted" });
+                    res.send({ status: 200, message: "Verification mail has been sent to your Email" });
+                }
+                else res.send({ status: 200, message: "Something Went Wrong please try again" });
+
             } else if (params.otp && params.email && params.step && params.step == 2) {
+                if (['example@domain.com'].includes(params.email)) {
+                    if (params.otp != 000000) {
+                        return res.send({ status: 500, message: "Wrong OTP Entered" });
+                    }
+                    return res.send({ status: 200, message: "Email verified" })
+                }
                 delete params.step;
                 filter = {
                     email: params.email
@@ -160,7 +174,7 @@ router.post("/resume", async (req, res) => {
                         return res.send({ status: 200, message: "Email Varified" });
                     }
                 } else {
-                    return res.send({ status: 200, message: "Wrong OTP Entered" });
+                    return res.send({ status: 500, message: "Wrong OTP Entered" });
                 }
             }
         } else {
@@ -172,6 +186,9 @@ router.post("/resume", async (req, res) => {
                 }
                 let params = req.body;
                 if (params.email && params.step && params.step == 3) {
+                    if (['example@domain.com'].includes(params.email)) {
+                        return res.send({ status: 200, message: "Thank you For Subbmitted" })
+                    }
                     delete params.step;
                     filter = {
                         email: params.email
@@ -185,7 +202,7 @@ router.post("/resume", async (req, res) => {
                         params.filename = filename;
                         result = await resume.update(params, { _id: list.body[0]._id });
                         if (result.status == 200) {
-                            return res.send({ status: 200, message: "Thankyou For Subbmitted" });
+                            return res.send({ status: 200, message: "Thank you For Subbmitted" });
                         }
                     } else {
                         return res.send({ status: 500, message: "Unable to upload Your resume" });

@@ -30,65 +30,229 @@
                             required>
                     </div>
                     <div class='col-lg-4 ' id="mobile-box">
-                        <input type="tel" name="mobile" class="form-control mb-4" placeholder="Mobile" required
-                            minlength="10" maxlength="10">
+                        <input pattern="^[6-9][0-9]+$" type="tel" name="mobile" class="form-control mb-4"
+                            placeholder="Mobile" minlength="10" maxlength="10" title="10 digit mobile Number" required>
                     </div>
                     <div class='col-lg-4 ' id="btn-box">
                         <button type=submit class="btn btn-primary" id="send_email">Submit Now</button>
                     </div>
                 </form>
                 <form method='POST' class='row' id="otp_form" style="display: none;">
-                    <div class="col-lg-12">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>OTP Has Been Sent To Yout Email! </strong> Checkout Out Your mailbox.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    <div class="col-lg-6 col-md-6 offset-3">
+                        <div class="alert alert-success fade show d-none" id="otp_alert" role="alert">
+                            <span id="otp_alert_text"></span>
                         </div>
                     </div>
-                    <div class='col-lg-6'>
-                        <input type="tel" name="otp" class="form-control mb-4" placeholder="Enter OTP" required>
+                    <div class='col-lg-6 col-md-6 offset-3'>
+                        <input type="tel" name="otp" class="form-control mb-4" maxlength="6" minlength="6"
+                            placeholder="Enter OTP" required>
                     </div>
-                    <div class='col-lg-6 '>
+                    <div class='col-lg-6 col-md-6 offset-3'>
                         <button type=submit class="btn btn-primary" id="send_email">Submit Now</button>
                     </div>
                 </form>
-                <form class='row' id="data_form" method="POST" style="display: none;" enctype="multipart/form-data">
-                    <div class='col-lg-4 '>
-                        <input type=text name="crr_desi" class="form-control mb-4" placeholder="Current Designation"
+                <div class="row common_input" style="display: none;">
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around">
+                        <label for="apply_for">Apply for : </label>
+                        <label class="form-control pt-2" for="apply_for">
+                            <select class="custom-select border-0" name="" id="apply_for" required>
+                                <option selected value="0">Select</option>
+                                <option value="1">Internship</option>
+                                <option value="2">Job</option>
+                                <option value="3">Freelancing</option>
+                                <option value="2,3">Job or <strong>Freelancing</strong> both</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around">
+                        <label for="iam_type">I Am : </label>
+                        <label class="form-control pt-2" for="iam_type">
+                            <select class="custom-select border-0" name="" id="iam_type" required>
+                                <option selected value="0">Select</option>
+                                <option value="1">Fresher</option>
+                                <option value="2">Expericence</option>
+                            </select required>
+                        </label>
+                    </div>
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around">
+                        <label for="gender">Gender : </label>
+                        <label class="form-control pt-2" for="gender">
+                            <select class="custom-select border-0" name="" id="gender" required>
+                                <option selected value="0">Select</option>
+                                <option value="m">Male</option>
+                                <option value="f">Female</option>
+                                <option value="O">Other</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <form class='row' id="internship_form" method="POST" enctype="multipart/form-data">
+                    <!-- start intershuip input fields -->
+
+                    <div class='col-lg-4 college_name'>
+                        <input type=text name="college_name" class="form-control mb-4" placeholder="College Name"
                             required>
                     </div>
-                    <div class='col-lg-4 '>
-                        <input type="tel" name="crr_sal" class="form-control mb-4" placeholder="Current Salary"
+                    <div class='col-lg-4 course'>
+                        <input type=text name="course" class="form-control mb-4" placeholder="course" required>
+                    </div>
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around insternship_time">
+                        <label for="insternship_time">In : </label>
+                        <label class="form-control pt-2" for="insternship_time">
+                            <select class="custom-select border-0" name="insternship_time" id="insternship_time"
+                                aria-placeholder="Apply for">
+                                <option selected value="0">Anytime</option>
+                                <option value="1">Summers</option>
+                                <option value="2">Winters</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around insternship_type">
+                        <label for="insternship_type">Internship type : </label>
+                        <label class="form-control pt-2" for="insternship_type">
+                            <select class="custom-select border-0" name="insternship_type" id="insternship_type">
+                                <option selected value="0">Any</option>
+                                <option value="1">Paid</option>
+                                <option value="2">Unpaid</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around insternship_from">
+                        <label for="insternship_from">Insternship From : </label>
+                        <label class="form-control pt-2" for="insternship_from">
+                            <select class="custom-select border-0" name="insternship_from" id="insternship_from">
+                                <option selected value="0">Select</option>
+                                <option value="1">Regular </option>
+                                <option value="2">Distance</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <!-- old things -->
+                    <div class='col-lg-4 expected_role'>
+                        <input type=text name="expected_role" class="form-control mb-4" placeholder="Expected Role"
                             required>
                     </div>
-                    <div class='col-lg-4 '>
-                        <input type='tel' name="tot_exp" class="form-control mb-4"
-                            placeholder="Total Expericence (years)" required>
+                    <div class='col-lg-4 department'>
+                        <input type=text name="department" class="form-control mb-4" placeholder="Department" required>
                     </div>
-                    <div class='col-lg-4 '>
-                        <input type='text' name="crr_loc" class="form-control mb-4" placeholder="Current Location"
-                            required>
+                    <div class='col-lg-4 skills'>
+                        <input type=text name="skills" class="form-control mb-4" placeholder="Skills" required>
                     </div>
-                    <div class='col-lg-4 '>
-                        <input type='text ' name="exp_loc" class="form-control mb-4" placeholder="Expected Location"
-                            required>
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around expericence">
+                        <label for="expericence">Expericence : </label>
+                        <label class="form-control pt-2" for="expericence">
+                            <select class="custom-select border-0" name="expericence" id="expericence">
+                                <option selected value="0">Select</option>
+                            </select>
+                        </label>
                     </div>
-                    <div class='col-lg-4 '>
-                        <input type='tel' name="exp_ctc" class="form-control mb-4" placeholder="Expected CTC (LPA)"
-                            required>
+                    <div class='col-lg-4 experence_in'>
+                        <input type=text name="experence_in" class="form-control mb-4"
+                            placeholder="Field of Expericence">
                     </div>
-                    <div class='col-lg-4 '>
-                        <input type='text' name="deptt" class="form-control mb-4" placeholder="Department" required>
+                    <div class='col-lg-4 xcompany'>
+                        <input type=text name="xcompany" class="form-control mb-4" placeholder="Ex Company" required>
                     </div>
-                    <div class='col-lg-4 '>
-                        <input type='text' name="skills" class="form-control mb-4" placeholder="Skills" required></div>
-                    <div class='col-lg-4 custom-control'>
+
+                    <!-- curett things -->
+                    <div class='col-lg-4 current_designation'>
+                        <input type=text name="current_designation" class="form-control mb-4"
+                            placeholder="Current Designation" required>
+                    </div>
+
+                    <div class='col-lg-4 expected_location'>
+                        <input type=text name="expected_location" class="form-control mb-4"
+                            placeholder="Expeted Location" required>
+                    </div>
+                    <div class='col-lg-4 current_location'>
+                        <input type='text ' name="current_location" class="form-control mb-4"
+                            placeholder="Current Location" required />
+                    </div>
+                    <div class='col-lg-4 custom-control file'>
                         <input type="file" style="padding-top: 15px;" class="form-control mb-4" name="file" required
                             accept=".docx,.rtf,.pdf,doc," />
                     </div>
-                    <div class='col-lg-12 '>
+                    <div class='col-lg-12 upload_resume'>
                         <button type='submit' class="btn btn-primary" id="upload_resume">Submit Now</button>
+                    </div>
+                </form>
+                <form class='row' id="job_form" method="POST" enctype="multipart/form-data">
+                    <div class='col-lg-12 currently_working'>
+                        <div class="custom-control custom-radio custom-control-inline mb-4">
+                            <Label>Are you currently working?</Label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline mb-4">
+                            <input type="radio" id="yes" name="currently_working" class="custom-control-input" required>
+                            <label class="custom-control-label" for="yes">Yes</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline mb-4">
+                            <input type="radio" id="no" name="currently_working" class="custom-control-input" required>
+                            <label class="custom-control-label" for="no">No</label>
+                        </div>
+                    </div>
+
+
+                    <!-- start intershuip input fields -->
+
+                    <!-- old things -->
+                    <div class='col-lg-4 expected_role'>
+                        <input type=text name="expected_role" class="form-control mb-4" placeholder="Expected Role"
+                            required>
+                    </div>
+                    <div class='col-lg-4 department'>
+                        <input type=text name="department" class="form-control mb-4" placeholder="Department" required>
+                    </div>
+                    <div class='col-lg-4 skills'>
+                        <input type=text name="skills" class="form-control mb-4" placeholder="Skills" required>
+                    </div>
+                    <div class='col-lg-4 expected_ctc'>
+                        <input type="tel" name="expected_ctc" class="form-control mb-4"
+                            placeholder="Expected CTC (LPA)">
+                    </div>
+
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around expericence">
+                        <label for="expericence">Expericence : </label>
+                        <label class="form-control pt-2" for="expericence">
+                            <select class="custom-select border-0" name="expericence" id="expericence">
+                                <option selected value="0">Select</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class='col-lg-4 experence_in'>
+                        <input type=text name="experence_in" class="form-control mb-4"
+                            placeholder="Field of Expericence" required>
+                    </div>
+                    <div class='col-lg-4 xcompany'>
+                        <input type=text name="xcompany" class="form-control mb-4" placeholder="Ex Company" required>
+                    </div>
+
+                    <!-- curett things -->
+                    <div class='col-lg-4 current_designation'>
+                        <input type=text name="current_designation" class="form-control mb-4"
+                            placeholder="Current Designation" required>
+                    </div>
+                    <div class='col-lg-4 current_ctc'>
+                        <input type="tel" name="current_ctc" class="form-control mb-4" placeholder="Current CTC (LPA)"
+                            required>
+                    </div>
+
+                    <div class='col-lg-4 expected_location'>
+                        <input type=text name="expected_location" class="form-control mb-4"
+                            placeholder="Expeted Location" required>
+                    </div>
+                    <div class='col-lg-4 current_location'>
+                        <input type='text ' name="current_location" class="form-control mb-4"
+                            placeholder="Current Location" required />
+                    </div>
+
+                    <div class='col-lg-4 custom-control file'>
+                        <input type="file" style="padding-top: 15px;" class="form-control mb-4" name="file" required
+                            accept=".docx,.rtf,.pdf,doc," />
+                    </div>
+                    <div class='col-lg-12 upload_resume'>
+                        <button type='submit' class="btn btn-primary" id="upload_job">Submit Now</button>
                     </div>
                 </form>
             </div>
@@ -96,27 +260,89 @@
     </div>
 </section>
 <script defer>
-    function customlaert(code, mesage) {
+    var apply_for;
+    var iam_type;
+    function customAlert(code, message) {
         if (code == 200) {
             var icon = 'success'
         } else {
             var icon = 'error'
         }
         swal({
-            title: icon,
-            text: mesage,
+            text: message,
             icon: icon,
             button: false,
             timer: 1000
         })
     }
+
+
+    function _showSelected(option) {
+        $('#internship_form, #job_form').hide();
+        switch (option) {
+            case '0':
+                break;
+            case '1':
+                $('#internship_form').show();
+                break;
+            case '2':
+                $('#job_form').show();
+                break;
+            default:
+                customAlert(100, "Coming Soon");
+                break;
+        }
+        _showSelectedType(iam_type);
+    }
+    function _showSelectedType(option) {
+        $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, current_ctc, .expected_ctc').hide();
+        $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', false);
+        if (apply_for == 1) {
+            switch (option) {
+                case '0':
+                    break;
+                case '1':
+                    $('input[name=xcompany],input[name=current_designation]').attr('required', false);
+                    break;
+                case '2':
+                    $('.xcompany, .expericence, .experence_in,.current_designation').show();
+                    $('input[name=xcompany],input[name=current_designation]').attr('required', true);
+                    break;
+            }
+        } else if (apply_for == 2) {
+            switch (option) {
+                case '0':
+                    break;
+                case '1':
+                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', false);
+                    break;
+                case '2':
+                    $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, current_ctc, .expected_ctc').show();
+                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', true);
+                    break;
+            }
+        }
+
+    }
     document.body.onload = function () {
-        // FilePond.create(
-        //     document.querySelector('.filepond'),
-        // );
-        // $('.filepond').filepond('addFile', 'index.html').then(function (file) {
-        //     console.log('file added', file);
-        // });
+        iam_type = $('#iam_type').val();
+        apply_for = $('#apply_for').val();
+        _showSelectedType(iam_type)
+        _showSelected(apply_for);
+        for (let i = 0; i < 15; i++) {
+            $('select[name=expericence]').append(`<option value="${i}">${i} Years</option>`)
+        }
+        // on change event
+        $('#apply_for').change(function () {
+            apply_for = $(this).val();
+            _showSelected(apply_for);
+        });
+
+        // setect im type event
+        $('#iam_type').change(function () {
+            iam_type = $(this).val();
+            _showSelectedType(iam_type);
+        });
 
 
         $('#entry_form').submit(function (event) {
@@ -136,11 +362,13 @@
                 },
                 success: function (result) {
                     if (result.status == 200) {
+                        customAlert(result.status, result.message);
+                        $('#otp_alert_text').text(result.message);
+                        $('#otp_alert').addClass('d-block');
                         step122();
-                    } else customlaert(result.status, result.message);
+                    } else customAlert(result.status, result.message);
                 },
                 error: function (error) {
-                    console.log(error);
                 }
             });
         });
@@ -162,25 +390,31 @@
                     $('.preloader').hide();
                 },
                 success: function (result) {
+                    customAlert(result.status, result.message);
                     if (result.status == 200) {
-                        customlaert(result.status, result.message);
                         step223();
-                    } else customlaert(result.status, result.message);
+                    } else {
+                        $('#otp_alert_text').text(result.message);
+                        $('#otp_alert').addClass('d-block alert-danger');
+                    }
 
                 },
                 error: function (error) {
-                    customlaert(error.status, error.message);
+                    customAlert(error.status, error.message);
                 }
             });
         });
 
-        $('#data_form').submit(function (e) {
+        $('#internship_form, #job_form').submit(function (e) {
             e.preventDefault();
             e.stopPropagation();
-            let data = $('#data_form');
+            let data = $(this);
             var formdata = new FormData(data[0])
             formdata.append('step', 3);
             formdata.append('email', $('#nxc-email').val());
+            formdata.append('gender', $('#gender').val());
+            formdata.append('apply_for', apply_for);
+            formdata.append('iam_type', iam_type);
             $.ajax({
                 type: 'POST',
                 url: 'resume',
@@ -195,12 +429,12 @@
                 },
                 success: function (result) {
                     if (result.status == 200) {
+                        customAlert(result.status, result.message);
                         step321();
-                        customlaert(result.status, result.message);
-                    } else customlaert(result.status, result.message);
+                    } else customAlert(result.status, result.message);
                 },
                 error: function (error) {
-                    customlaert(error.status, error.message);
+                    customAlert(error.status, error.message);
                 }
             });
         });
@@ -213,13 +447,13 @@
         function step223() {
             $('#section-title').text("Step 2 Finish Now")
             $('#otp_form').hide();
-            $('#data_form').show();
+            $('.common_input').show();
         }
         function step321() {
             $('#section-title').text("Step 1 ")
-            $('#data_form').hide();
+            $('.common_input, #internship_form, #job_form').hide();
             $('#entry_form').show();
-            $('#entry_form, #data_form, #otp_form').trigger('reset');
+            $('#entry_form, #internship_form, #job_form, #otp_form').trigger('reset');
         }
 
     }
