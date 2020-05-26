@@ -18,7 +18,7 @@ var app = module.exports = express()
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
 // setting up robot.txt
-app.use(robots({UserAgent: '*', Disallow: '/public/'}))
+app.use(robots({ UserAgent: '*', Disallow: '/public/' }))
 
 app.set('view engine', 'ejs')
 
@@ -41,12 +41,12 @@ app.use(cookieParse())
 // global.log = require('./logs')
 
 app.use((req, res, next) => {
-    const nvENV = process.env.NODE_ENV || 'development'
+    const OY_ENV = process.env.NODE_ENV || 'development'
 
     // CONFIG = require('./config')
-    console.log(nvENV);
-    CONFIG.BASE_URL = `https://${req.hostname}`
-
+    // console.log(nvENV);
+    CONFIG.BASE_URL = req.headers.host.match(/^localhost/) ? `http://${req.headers.host}/` : `https://${req.headers.host}/`
+    console.log(CONFIG);
     next();
 })
 
@@ -63,4 +63,4 @@ app.use((req, res, next) => {
     res.status(400).render('error/404');
 })
 
-app.listen(process.env.PORT, () => console.log(`Example app listening at ${CONFIG.BASE_URL}${process.env.PORT}`))
+app.listen(process.env.PORT || 3000, () => console.log(`Example app listening at ${CONFIG.BASE_URL}${process.env.PORT}`))
