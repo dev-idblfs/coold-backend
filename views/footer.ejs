@@ -1,18 +1,18 @@
 <section class=subscription>
     <div class=container>
         <div class=subscription-wrapper>
-            <div
-                class="d-flex position-relative mx-5 justify-content-between align-items-center flex-column flex-md-row text-center text-md-left">
+            <div class="d-flex position-relative mx-5 justify-content-between align-items-center flex-column flex-md-row
+                text-center text-md-left">
                 <h3 class="text-white flex-fill">Subscribe<br>to our newsletter</h3>
-                <form action="#" method=post name=mc-embedded-subscribe-form novalidate class="row flex-fill">
-                    <div class="col-lg-7 my-md-2 my-2"><input type=email
-                            class="form-control text-white px-4 border-0 w-100 text-center text-md-left"
-                            placeholder="Your Email" name=EMAIL></div>
+                <form  id="activeNewsFeed" action="#" method=post  class="row flex-fill">
+                    <div class="col-lg-7 my-md-2 my-2">
+                        <input type=email class="form-control text-white px-4 border-0 w-100 text-center text-md-left"
+                            placeholder="Your Email" name='subs-email' required>
+                    </div>
                     <div class="col-lg-5 my-md-2 my-2">
-                        <button type="button" name=subscribe class="btn btn-primary btn-lg border-0 w-100">Subscribe
-                            Now</button>
-                        <div style=position:absolute;left:-5000px aria-hidden=true><input type=text
-                                name=b_463ee871f45d2d93748e77cad_a0a2c6d074 tabindex=-1></div>
+                        <button type="submit" name=subscribe class="btn btn-primary btn-lg border-0 w-100">Subscribe
+                            Now
+                        </button>
                     </div>
                 </form>
             </div>
@@ -84,5 +84,21 @@
 <script src="<%- js.j -%>"></script>
 <script src="<%- js.k -%>"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#activeNewsFeed').submit(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            setTimeout(() => {
+                swal({
+                    text: "Thank you for Subscribe!",
+                    icon: "success",
+                    button: false,
+                    timer: 1000
+                })
+            }, 500);
+        })
+    });
+</script>
 
 </html>
