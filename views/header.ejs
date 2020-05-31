@@ -42,10 +42,17 @@
 
     <meta name="theme-color" content="#00a4db">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134186167-2"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Caveat:700&display=swap" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134186167-2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -80,9 +87,11 @@
                                 <a class="dropdown-item text-color" href='<%- base_url -%>services'>Overview</a>
                                 <a class="dropdown-item text-color" href='<%- base_url -%>services/hr'>HR</a>
                                 <a class="dropdown-item text-color" href='<%- base_url -%>services/payroll'>Payroll</a>
-                                <a class="dropdown-item text-color" href='<%- base_url -%>services/performance'>Performance</a>
+                                <a class="dropdown-item text-color"
+                                    href='<%- base_url -%>services/performance'>Performance</a>
                                 <a class="dropdown-item text-color" href='<%- base_url -%>services/recruit'>Recruit</a>
-                                <a class="dropdown-item text-color" href='<%- base_url -%>services/timesheet'>Timesheet</a>
+                                <a class="dropdown-item text-color"
+                                    href='<%- base_url -%>services/timesheet'>Timesheet</a>
                             </div>
                         </li>
                         <li class=nav-item><a class="nav-link text-white text-capitalize"
