@@ -1,0 +1,70 @@
+regex for mobile (6,7,8,9)
+
+
+type form
+
+internship
+    fressher
+        college name
+        courser
+        expeted location
+        summer or winter
+        regular or distance
+        department 
+        role 
+        period of internship
+        paid / unpaid
+        resume upload
+        skills
+        current location
+        
+    experince
+
+        college name
+        courser
+        expeted location
+        summer or winter
+        regular or distance
+        department 
+        role 
+        period of internship
+        paid / unpaid
+        resume upload
+        skills
+        current location
+        time of exp.  in yeras
+        field of  experince
+        last compaony.
+
+job
+
+    fressher
+        current location
+        expected CTC
+        expected role,deppt., title
+        skills
+        covor later /  resume / other() 
+
+
+    experince
+        are you cuurenting working.
+        /last / current compaony
+        last / current degisnation
+        last / current salary
+        current location
+        current / last CTC
+        expected CTC
+        expected role,deppt., title
+        skills
+        notice period 
+        bug out options
+        covor later /  resume / other() 
+
+        ready to relocation
+            expected location
+
+
+freelancing
+
+
+

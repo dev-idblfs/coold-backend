@@ -58,31 +58,32 @@ const mail = (email, code) => {
 
 const _loadJS = () => {
     let js = {
-        a: "public/js/jquery.min.js",
-        b: "public/js/bootstrap.min.js",
-        c: "public/js/slick.min.js",
-        d: "public/js/venobox.min.js",
-        e: "public/js/gmap.js",
-        f: "public/js/fuse.min.js",
-        g: "public/js/mark.js",
-        h: "public/js/search.js",
-        i: "public/js/ddj.js",
-        j: "public/js/script.min.js",
-        brandIcon: 'public/images/icon/icon.png'
+        a: CONFIG.BASE_URL + "public/js/jquery.min.js",
+        b: CONFIG.BASE_URL + "public/js/bootstrap.min.js",
+        c: CONFIG.BASE_URL + "public/js/slick.min.js",
+        d: CONFIG.BASE_URL + "public/js/venobox.min.js",
+        e: CONFIG.BASE_URL + "public/js/gmap.js",
+        f: CONFIG.BASE_URL + "public/js/fuse.min.js",
+        g: CONFIG.BASE_URL + "public/js/mark.js",
+        h: CONFIG.BASE_URL + "public/js/search.js",
+        i: CONFIG.BASE_URL + "public/js/ddj.js",
+        j: CONFIG.BASE_URL + "public/js/script.min.js",
+        k: CONFIG.BASE_URL + "public/js/sweetAlerts.js",
+        brandIcon: CONFIG.BASE_URL + 'public/images/icon/icon.png'
     }
     return js;
 }
 
 const _loadCSS = () => {
     let css = {
-        a: "public/scss/bootstrap.min.css",
-        b: "public/scss/slick.css",
-        c: "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
-        d: "public/scss/venobox.css",
-        e: "public/scss/ddj.css",
-        f: "public/scss/style.min.css",
-        brandIcon: 'public/images/icon/icon.png',
-        loader: 'public/images/preloader.gif'
+        a: CONFIG.BASE_URL + "public/scss/bootstrap.min.css",
+        b: CONFIG.BASE_URL + "public/scss/slick.css",
+        c: CONFIG.BASE_URL + "public/scss/font-awesome.min.css",
+        d: CONFIG.BASE_URL + "public/scss/venobox.css",
+        e: CONFIG.BASE_URL + "public/scss/ddj.css",
+        f: CONFIG.BASE_URL + "public/scss/style.min.css",
+        brandIcon: CONFIG.BASE_URL + 'public/images/icon/icon.png',
+        loader: CONFIG.BASE_URL + 'public/images/preloader.gif'
     }
     return css
 }
@@ -103,7 +104,7 @@ router.get("/about", async function (req, res) {
     res.render('body', { header: header, body: body, footer: footer });
 
 })
-router.get("/service", async function (req, res) {
+router.get("/services", async function (req, res) {
     var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
     var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
     var body = await ejs.renderFile('views/service/index.ejs');
@@ -230,11 +231,12 @@ router.get("/policy", async function (req, res) {
 
 const services = ['hr', 'payroll', 'performance', 'recruit', 'timesheet'];
 
-router.get("/:service", async function (req, res, next) {
+router.get("/services/:service", async function (req, res, next) {
+    console.log(req.params);
     if (Object.keys(req.params).length > 0 && services.includes(req.params.service)) {
         var header = await ejs.renderFile('views/header.ejs', { css: _loadCSS(), base_url: CONFIG.BASE_URL });
         var footer = await ejs.renderFile('views/footer.ejs', { js: _loadJS(), base_url: CONFIG.BASE_URL });
-        var body = await ejs.renderFile('views/service/aio-index.ejs', { index: services.indexOf(req.params.service) + 1 });
+        var body = await ejs.renderFile('views/service/aio-index.ejs', { index: services.indexOf(req.params.service) + 1, base_url: CONFIG.BASE_URL });
         // console.log(services.indexOf(req.params.service));
         res.render('body', { header: header, body: body, footer: footer });
     } else {
