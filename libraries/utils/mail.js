@@ -46,7 +46,7 @@ const mail = () => {
     return nodemailer.createTransport({
         service: 'Godaddy',
         secureConnection: true,
-        auth: CONFIG.MAIL_AUTH
+        auth: CONFIG.MAIL_AUTH.auth
     });
 }
 
