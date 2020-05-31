@@ -5,7 +5,7 @@ router.get('/sitemap.xml', (req, res) => {
     res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
 });
 
-router.get('/done', async (req, res) => {
+router.post('/done', async (req, res) => {
     // console.log(req.body);
     const { exec } = require('child_process');
     try {
@@ -34,11 +34,11 @@ router.get('/done', async (req, res) => {
 // load defualt for redirect
 router.use("/", require(ROOT_DIR + '/controllers/default'))
 
-// // laod middlewares
-router.use("/v", require(ROOT_DIR + '/middlewares/base'))
-router.use("/v", require(ROOT_DIR + '/middlewares/auth'))
+// laod middlewares
+router.use("/v1", require(ROOT_DIR + '/middlewares/base'))
+router.use("/v1", require(ROOT_DIR + '/middlewares/auth'))
 
-router.use("/v", require(ROOT_DIR + '/controllers/user/admin'))
+router.use("/v1", require(ROOT_DIR + '/controllers/user/admin'))
 
 
 router.use("/api", require(ROOT_DIR + '/controllers/api/user/admin'))

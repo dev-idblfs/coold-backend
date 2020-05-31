@@ -43,9 +43,15 @@ app.use(cookieParse())
 app.use((req, res, next) => {
     const OY_ENV = process.env.NODE_ENV || 'development'
 
-    // CONFIG = require('./config')
-    // console.log(nvENV);
+    // load comman CONFIG
+    const globalcnf = require(`${ROOT_DIR}/config/config`);
+    // load conditional config
+    const conditionalcnf = require(`${ROOT_DIR}/config/${req.headers.host.match(/^localhost/) ? 'development' : 'production'}/config`);
+    // comdine config into global variables
+    CONFIG = { ...globalcnf, ...conditionalcnf };
+
     CONFIG.BASE_URL = req.headers.host.match(/^localhost/) ? `http://${req.headers.host}/` : `https://${req.headers.host}/`
+    
     console.log(CONFIG);
     next();
 })
