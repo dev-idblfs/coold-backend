@@ -76,5 +76,5 @@ const sendMail = (options) => {
 
 module.exports = {
     sendMail: sendMail,
-    mailApi: mailAPI
+    mailAPI: mailAPI
 }

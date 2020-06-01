@@ -8,6 +8,8 @@ const request = require('request-promise');
 const multer = require('multer');
 const assets = require(`${ROOT_DIR}//controllers/site/load_base`);
 const mail = require(`${ROOT_DIR}/libraries/utils/mail`);
+const mailuitls = require(`${ROOT_DIR}/libraries/utils/uitls`);
+
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -158,8 +160,7 @@ router.get("/policy", async (req, res) => {
 })
 
 router.get("/mail", async (req, res) => {
-    const mail = require(`${ROOT_DIR}/libraries/utils/utils`);
-    res.send(mail.sendMail());
+    res.send(mailuitls.sendMail());
 })
 
 module.exports = router;
