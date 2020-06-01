@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 
 
 
-const mailApi = (email, code) => {
+const mailAPI = (email, code) => {
     return new Promise(async (resolve, reject) => {
         const options = {
             method: 'POST',
@@ -76,5 +76,5 @@ const sendMail = (options) => {
 
 module.exports = {
     sendMail: sendMail,
-    mailApi: mailApi
+    mailApi: mailAPI
 }
