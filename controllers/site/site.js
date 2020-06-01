@@ -8,7 +8,7 @@ const request = require('request-promise');
 const multer = require('multer');
 const assets = require(`${ROOT_DIR}//controllers/site/load_base`);
 const mail = require(`${ROOT_DIR}/libraries/utils/mail`);
-const mailuitls = require(`${ROOT_DIR}/libraries/utils/uitls`);
+const mailuitls = require(`${ROOT_DIR}/libraries/utils/utils`);
 
 
 var storage = multer.diskStorage({
