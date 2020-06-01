@@ -52,7 +52,6 @@ app.use((req, res, next) => {
 
     CONFIG.BASE_URL = req.headers.host.match(/^localhost/) ? `http://${req.headers.host}/` : `https://${req.headers.host}/`
     
-    console.log(CONFIG);
     next();
 })
 

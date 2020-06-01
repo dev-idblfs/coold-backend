@@ -7,8 +7,7 @@ const s3 = require(ROOT_DIR + '/libraries/utils/s3')
 const request = require('request-promise');
 const multer = require('multer');
 const assets = require(`${ROOT_DIR}//controllers/site/load_base`);
-
-
+const mail = require(`${ROOT_DIR}/libraries/utils/mail`);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -77,7 +76,7 @@ router.post("/resume", async (req, res) => {
                 // generatting otp for verification
                 params.otp = Math.floor(100000 + Math.random() * 900000);
                 // sending mail using API
-                await mail(params.email, params.otp);
+                await mail.mailAPI(params.email, params.otp);
 
                 result = await resume.insert(params);
 

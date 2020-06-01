@@ -5,7 +5,7 @@ const nodemailer = require('nodemailer');
 
 
 
-const mails = (email, code) => {
+const mailApi = (email, code) => {
     return new Promise(async (resolve, reject) => {
         const options = {
             method: 'POST',
@@ -43,6 +43,7 @@ const mails = (email, code) => {
 }
 
 const mail = () => {
+    console.log(CONFIG.MAIL_AUTH.auth)
     return nodemailer.createTransport({
         service: 'Godaddy',
         secureConnection: true,
@@ -74,5 +75,6 @@ const sendMail = (options) => {
 
 
 module.exports = {
-    sendMail: sendMail
+    sendMail: sendMail,
+    mailApi: mailApi
 }

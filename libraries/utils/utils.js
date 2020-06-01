@@ -26,7 +26,6 @@ const sendMail = async () => {
     };
     try {
         response = await mail.sendMail(mailOptions);
-        console.log(response);
         return response;
     } catch (error) {
         console.log("erroor", error);
