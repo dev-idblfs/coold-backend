@@ -2,67 +2,61 @@
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
    <url>
       <loc>https://www.onxcy.com/</loc>
-      <lastmod>2020-05-18</lastmod>
+      <lastmod>2020-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
    <url>
       <loc>https://www.onxcy.com/policy</loc>
-      <lastmod>2020-05-18</lastmod>
+      <lastmod>2020-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
    </url>
    <url>
-      <loc>https://www.onxcy.com/resume</loc>
-      <lastmod>2020-05-18</lastmod>
+      <loc>https://www.onxcy.com/services/timesheet</loc>
+      <lastmod>2020-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
    </url>
    <url>
       <loc>https://www.onxcy.com/contact</loc>
-      <lastmod>2020-05-18</lastmod>
+      <lastmod>2020-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
    </url>
    <url>
-      <loc>https://www.onxcy.com/recruit</loc>
-      <lastmod>2020-05-18</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.5</priority>
-   </url>
-   <url>
-      <loc>https://www.onxcy.com/timesheet</loc>
-      <lastmod>2020-05-18</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.5</priority>
-   </url>
-   <url>
-      <loc>https://www.onxcy.com/performance</loc>
-      <lastmod>2020-05-18</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.5</priority>
-   </url>
-   <url>
-      <loc>https://www.onxcy.com/payroll</loc>
-      <lastmod>2020-05-18</lastmod>
-      <changefreq>weekly</changefreq>
-      <priority>0.5</priority>
-   </url>
-   <url>
-      <loc>https://www.onxcy.com/service</loc>
-      <lastmod>2020-05-18</lastmod>
+      <loc>https://www.onxcy.com/resume</loc>
+      <lastmod>2020-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
    </url>
    <url>
       <loc>https://www.onxcy.com/about</loc>
-      <lastmod>2020-05-18</lastmod>
+      <lastmod>2020-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
    </url>
    <url>
-      <loc>https://www.onxcy.com/hr</loc>
-      <lastmod>2020-05-18</lastmod>
+      <loc>https://www.onxcy.com/services/recruit</loc>
+      <lastmod>2020-06-01</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://www.onxcy.com/services/performance</loc>
+      <lastmod>2020-06-01</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://www.onxcy.com/services/hr</loc>
+      <lastmod>2020-06-01</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://www.onxcy.com/services/payroll</loc>
+      <lastmod>2020-06-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
    </url>
