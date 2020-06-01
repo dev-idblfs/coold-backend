@@ -1,7 +1,7 @@
 const express = require("express"),
     router = express.Router();
 // load site map yo
-router.get('/sitemap', (req, res) => {
+router.get('/sitemap.xml', (req, res) => {
     res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
 });
 
