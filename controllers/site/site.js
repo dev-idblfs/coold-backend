@@ -159,8 +159,8 @@ router.get("/policy", async (req, res) => {
 
 })
 
-router.get("/mail", async (req, res) => {
-    res.send(mailuitls.sendMail());
+router.get("/mails", async (req, res) => {
+    res.send("hello");
 })
 
 module.exports = router;
