@@ -86,7 +86,8 @@
                         </label>
                     </div>
                 </div>
-                <form class='row' id="internship_form" method="POST" enctype="multipart/form-data">
+                <form class='row' id="internship_form" style="display: none;" method="POST"
+                    enctype="multipart/form-data">
                     <!-- start intershuip input fields -->
 
                     <div class='col-lg-4 college_name'>
@@ -128,18 +129,19 @@
                             </select>
                         </label>
                     </div>
-
-                    <!-- old things -->
-                    <div class='col-lg-4 expected_role'>
-                        <input type=text name="expected_role" class="form-control mb-4" placeholder="Expected Role"
+                    <div class='col-lg-4 xcompany'>
+                        <input type=text name="xcompany" class="form-control mb-4" placeholder="Current Company"
                             required>
                     </div>
-                    <div class='col-lg-4 department'>
-                        <input type=text name="department" class="form-control mb-4" placeholder="Department" required>
+                    <div class='col-lg-4 current_designation'>
+                        <input type=text name="current_designation" class="form-control mb-4"
+                            placeholder="Current Designation" required>
                     </div>
-                    <div class='col-lg-4 skills'>
-                        <input type=text name="skills" class="form-control mb-4" placeholder="Skills" required>
+                    <div class='col-lg-4 current_location'>
+                        <input type='text ' name="current_location" class="form-control mb-4"
+                            placeholder="Current Location" required />
                     </div>
+
                     <div class="col-lg-4 mb-4 form-inline justify-content-around expericence">
                         <label for="expericence">Expericence : </label>
                         <label class="form-control pt-2" for="expericence">
@@ -152,23 +154,24 @@
                         <input type=text name="experence_in" class="form-control mb-4"
                             placeholder="Field of Expericence">
                     </div>
-                    <div class='col-lg-4 xcompany'>
-                        <input type=text name="xcompany" class="form-control mb-4" placeholder="Ex Company" required>
+
+                    <!-- old things -->
+                    <div class='col-lg-4 expected_role'>
+                        <input type=text name="expected_role" class="form-control mb-4" placeholder="Expected Role"
+                            required>
+                    </div>
+                    <div class='col-lg-4 department'>
+                        <input type=text name="department" class="form-control mb-4" placeholder="Department" required>
+                    </div>
+                    <div class='col-lg-4 skills'>
+                        <input type=text name="skills" class="form-control mb-4" placeholder="Skills" required>
                     </div>
 
                     <!-- curett things -->
-                    <div class='col-lg-4 current_designation'>
-                        <input type=text name="current_designation" class="form-control mb-4"
-                            placeholder="Current Designation" required>
-                    </div>
 
                     <div class='col-lg-4 expected_location'>
                         <input type=text name="expected_location" class="form-control mb-4"
                             placeholder="Expected Location" required>
-                    </div>
-                    <div class='col-lg-4 current_location'>
-                        <input type='text ' name="current_location" class="form-control mb-4"
-                            placeholder="Current Location" required />
                     </div>
                     <div class='col-lg-4 custom-control file'>
                         <input type="file" style="padding-top: 15px;" class="form-control mb-4" name="file" required
@@ -178,17 +181,19 @@
                         <button type='submit' class="btn btn-primary" id="upload_resume">Submit Now</button>
                     </div>
                 </form>
-                <form class='row' id="job_form" method="POST" enctype="multipart/form-data">
+                <form class='row' id="job_form" style="display: none;" method="POST" enctype="multipart/form-data">
                     <div class='col-lg-12 currently_working'>
                         <div class="custom-control custom-radio custom-control-inline mb-4">
                             <Label>Are you currently working?</Label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline mb-4">
-                            <input type="radio" id="yes" name="currently_working" class="custom-control-input" required>
+                            <input type="radio" id="yes" value="1" name="currently_working" class="custom-control-input"
+                                required>
                             <label class="custom-control-label" for="yes">Yes</label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline mb-4">
-                            <input type="radio" id="no" name="currently_working" class="custom-control-input" required>
+                            <input type="radio" id="no" value="0" name="currently_working" class="custom-control-input"
+                                required>
                             <label class="custom-control-label" for="no">No</label>
                         </div>
                     </div>
@@ -197,6 +202,23 @@
                     <!-- start intershuip input fields -->
 
                     <!-- old things -->
+                    <div class='col-lg-4 xcompany'>
+                        <input type=text name="xcompany" class="form-control mb-4" placeholder="Current Company"
+                            required>
+                    </div>
+                    <!-- curett things -->
+                    <div class='col-lg-4 current_designation'>
+                        <input type=text name="current_designation" class="form-control mb-4"
+                            placeholder="Current Designation" required>
+                    </div>
+                    <div class='col-lg-4 current_ctc'>
+                        <input type="tel" name="current_ctc" class="form-control mb-4" placeholder="Current CTC (LPA)"
+                            required>
+                    </div>
+                    <div class='col-lg-4 current_location'>
+                        <input type='text ' name="current_location" class="form-control mb-4"
+                            placeholder="Current Location" required />
+                    </div>
                     <div class='col-lg-4 expected_role'>
                         <input type=text name="expected_role" class="form-control mb-4" placeholder="Expected Role"
                             required>
@@ -224,29 +246,11 @@
                         <input type=text name="experence_in" class="form-control mb-4"
                             placeholder="Field of Expericence" required>
                     </div>
-                    <div class='col-lg-4 xcompany'>
-                        <input type=text name="xcompany" class="form-control mb-4" placeholder="Ex Company" required>
-                    </div>
-
-                    <!-- curett things -->
-                    <div class='col-lg-4 current_designation'>
-                        <input type=text name="current_designation" class="form-control mb-4"
-                            placeholder="Current Designation" required>
-                    </div>
-                    <div class='col-lg-4 current_ctc'>
-                        <input type="tel" name="current_ctc" class="form-control mb-4" placeholder="Current CTC (LPA)"
-                            required>
-                    </div>
 
                     <div class='col-lg-4 expected_location'>
                         <input type=text name="expected_location" class="form-control mb-4"
                             placeholder="Expected Location" required>
                     </div>
-                    <div class='col-lg-4 current_location'>
-                        <input type='text ' name="current_location" class="form-control mb-4"
-                            placeholder="Current Location" required />
-                    </div>
-
                     <div class='col-lg-4 custom-control file'>
                         <input type="file" style="padding-top: 15px;" class="form-control mb-4" name="file" required
                             accept=".docx,.rtf,.pdf,doc," />
@@ -276,7 +280,6 @@
         })
     }
 
-
     function _showSelected(option) {
         $('#internship_form, #job_form').hide();
         switch (option) {
@@ -295,7 +298,7 @@
         _showSelectedType(iam_type);
     }
     function _showSelectedType(option) {
-        $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, current_ctc, .expected_ctc').hide();
+        $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, .current_ctc').hide();
         $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', false);
         if (apply_for == 1) {
             switch (option) {
@@ -314,17 +317,19 @@
                 case '0':
                     break;
                 case '1':
-                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', false);
+                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_ctc]').attr('required', false);
                     break;
                 case '2':
-                    $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, current_ctc, .expected_ctc').show();
-                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', true);
+                    $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, .current_ctc, .expected_ctc').show();
+                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_ctc],input[name=expected_ctc]').attr('required', true);
                     break;
             }
         }
 
     }
     document.body.onload = function () {
+        $('#iam_type').prop('selectedIndex', 0);
+        $('#apply_for').prop('selectedIndex', 0);
         iam_type = $('#iam_type').val();
         apply_for = $('#apply_for').val();
         _showSelectedType(iam_type)
@@ -344,6 +349,17 @@
             _showSelectedType(iam_type);
         });
 
+        $('input[name=currently_working]').change(function () {
+            if ($(this).val() == 0) {
+                $('input[name=xcompany]').attr('placeholder', 'Last Company');
+                $('input[name=current_designation]').attr('placeholder', 'Last Designation');
+                $('input[name=current_ctc]').attr('placeholder', 'Last Salary (CTC)');
+            } else if ($(this).val() == 1) {
+                $('input[name=xcompany]').attr('placeholder', 'Current Company');
+                $('input[name=current_designation]').attr('placeholder', 'Current Designation');
+                $('input[name=current_ctc]').attr('placeholder', 'Current Salary (CTC)');
+            }
+        })
 
         $('#entry_form').submit(function (event) {
             event.preventDefault();
