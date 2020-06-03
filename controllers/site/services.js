@@ -7,9 +7,10 @@ const ejs = require('ejs');
 
 
 router.get("/", async function (req, res) {
+    console.log('aaa');
     var header = await ejs.renderFile('views/header.ejs', { css: assets.loadCSS(), base_url: CONFIG.BASE_URL });
     var footer = await ejs.renderFile('views/footer.ejs', { js: assets.loadJS(), base_url: CONFIG.BASE_URL });
-    var body = await ejs.renderFile('views/service/index.ejs');
+    var body = await ejs.renderFile('views/service/index.ejs', { base_url: CONFIG.BASE_URL });
 
     res.render('body', { header: header, body: body, footer: footer });
 
