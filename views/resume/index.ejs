@@ -259,6 +259,31 @@
                         <button type='submit' class="btn btn-primary" id="upload_job">Submit Now</button>
                     </div>
                 </form>
+                <form class='row' id="freelance_form" style="display: none;" method="POST"
+                    enctype="multipart/form-data">
+
+                    <div class='col-lg-4 expected_role'>
+                        <input type=text name="expected_role" class="form-control mb-4" placeholder="Expected Role"
+                            required>
+                    </div>
+                    <div class='col-lg-4 current_location'>
+                        <input type='text ' name="current_location" class="form-control mb-4"
+                            placeholder="Current Location" required />
+                    </div>
+
+                    <div class='col-lg-4 skills'>
+                        <input type=text name="skills" class="form-control mb-4" placeholder="Skills" required>
+                    </div>
+
+                    <div class='col-lg-4 custom-control file'>
+                        <input type="file" style="padding-top: 15px;" class="form-control mb-4" name="file" required
+                            accept=".docx,.rtf,.pdf,doc," />
+                    </div>
+                    <div class='col-lg-12 upload_resume'>
+                        <button type='submit' class="btn btn-primary" id="upload_resume">Submit Now</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -290,6 +315,9 @@
                 break;
             case '2':
                 $('#job_form').show();
+                break;
+            case '3':
+                $('#freelance_form').show();
                 break;
             default:
                 customAlert(100, "Coming Soon");
@@ -421,7 +449,7 @@
             });
         });
 
-        $('#internship_form, #job_form').submit(function (e) {
+        $('#internship_form, #job_form, #freelance_form').submit(function (e) {
             e.preventDefault();
             e.stopPropagation();
             let data = $(this);
@@ -467,9 +495,11 @@
         }
         function step321() {
             $('#section-title').text("Step 1 ")
-            $('.common_input, #internship_form, #job_form').hide();
+            $('.common_input, #internship_form, #job_form, #freelance_form').hide();
             $('#entry_form').show();
-            $('#entry_form, #internship_form, #job_form, #otp_form').trigger('reset');
+            $('#entry_form, #internship_form, #job_form, #otp_form, #freelance_form').trigger('reset');
+            $('#iam_type').prop('selectedIndex', 0);
+            $('#apply_for').prop('selectedIndex', 0);
         }
 
     }

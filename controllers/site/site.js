@@ -156,11 +156,6 @@ router.get("/policy", async (req, res) => {
     var body = await ejs.renderFile('views/policy/index.ejs');
 
     res.render('body', { header: header, body: body, footer: footer });
-
-})
-
-router.get("/mail", async (req, res) => {
-    res.send(mailuitls.sendMail());
 })
 
 module.exports = router;
