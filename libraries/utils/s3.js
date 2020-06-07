@@ -23,13 +23,8 @@ const putObject = (file, filename) => {
             Body: file,
             Key: filename
         }).promise().then(response => {
-            console.log(`done! - `, response)
-            console.log(
-                `The URL is ${s3.getSignedUrl('getObject', { Bucket: BUCKET, Key: filename })}`
-            )
             resolve({ status: 200, body: response });
         }).catch(err => {
-            console.log('failed:', err)
             reject({ status: 404, body: err });
         });
     });

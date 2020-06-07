@@ -1,12 +1,15 @@
-const express = require("express"),
-    router = express.Router();
-const path = require('path')
+const express = require("express");
+const router = express.Router();
 var ejs = require('ejs');
+
 const resume = require(ROOT_DIR + '/modals/resumes');
+
 const s3 = require(ROOT_DIR + '/libraries/utils/s3')
-const request = require('request-promise');
+
 const multer = require('multer');
 const assets = require(`${ROOT_DIR}//controllers/site/load_base`);
+
+const fs = require('fs');
 const mail = require(`${ROOT_DIR}/libraries/utils/mail`);
 const mailuitls = require(`${ROOT_DIR}/libraries/utils/utils`);
 
@@ -127,7 +130,11 @@ router.post("/resume", async (req, res) => {
                     // setting file for upload resume for unqiue identification
                     // append email
                     let filename = `${params.email}-${req.file.filename}`
-                    var result = await s3.putObject(res.file, filename);
+
+                    let fsFile = fs.readFileSync(`${ROOT_DIR}/resumes/${req.file.filename}`);
+                    
+                    var result = await s3.putObject(fsFile, filename);
+                    
                     if (result.status == 200) {
                         let list = await resume.fetch(filter)
                         params.filename = filename;
