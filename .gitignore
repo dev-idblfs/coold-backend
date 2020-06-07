@@ -1,6 +1,10 @@
 #coustom file/folder
 resumes
-web.config
+*.config
+*.key
+*.pem
+*.pub
+
 
 # Logs
 logs
