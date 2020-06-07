@@ -70,7 +70,7 @@
                             <select class="custom-select border-0" name="" id="iam_type" required>
                                 <option selected value="0">Select</option>
                                 <option value="1">Fresher</option>
-                                <option value="2">Expericence</option>
+                                <option value="2">Experience</option>
                             </select required>
                         </label>
                     </div>
@@ -142,17 +142,21 @@
                             placeholder="Current Location" required />
                     </div>
 
-                    <div class="col-lg-4 mb-4 form-inline justify-content-around expericence">
-                        <label for="expericence">Expericence : </label>
-                        <label class="form-control pt-2" for="expericence">
-                            <select class="custom-select border-0" name="expericence" id="expericence">
-                                <option selected value="0">Select</option>
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around experience" title="Experie">
+                        <label for="experience">Exp : </label>
+                        <label class="form-control pt-2" for="experience">
+                            <select class="custom-select border-0 w-auto experience_y" name="experience"
+                                id="experience_y">
+                            </select>
+                            <select class="custom-select border-0 w-auto experience_m" name="experience"
+                                id="experience_m">
                             </select>
                         </label>
+
                     </div>
-                    <div class='col-lg-4 experence_in'>
-                        <input type=text name="experence_in" class="form-control mb-4"
-                            placeholder="Field of Expericence">
+                    <div class='col-lg-4 experience_in'>
+                        <input type=text name="experience_in" class="form-control mb-4"
+                            placeholder="Field of experience">
                     </div>
 
                     <!-- old things -->
@@ -234,17 +238,20 @@
                             placeholder="Expected CTC (LPA)">
                     </div>
 
-                    <div class="col-lg-4 mb-4 form-inline justify-content-around expericence">
-                        <label for="expericence">Expericence : </label>
-                        <label class="form-control pt-2" for="expericence">
-                            <select class="custom-select border-0" name="expericence" id="expericence">
-                                <option selected value="0">Select</option>
+                    <div class="col-lg-4 mb-4 form-inline justify-content-around experience" title="Experience">
+                        <label for="experience" title="Experience">Exp. : </label>
+                        <label class="form-control pt-2" for="experience">
+                            <select class="custom-select border-0 w-auto experience_y" name="experience"
+                                id="experience_y">
+                            </select>
+                            <select class="custom-select border-0 w-auto experience_m" name="experience"
+                                id="experience_m">
                             </select>
                         </label>
                     </div>
-                    <div class='col-lg-4 experence_in'>
-                        <input type=text name="experence_in" class="form-control mb-4"
-                            placeholder="Field of Expericence" required>
+                    <div class='col-lg-4 experience_in'>
+                        <input type=text name="experience_in" class="form-control mb-4"
+                            placeholder="Field of experience" required>
                     </div>
 
                     <div class='col-lg-4 expected_location'>
@@ -306,7 +313,7 @@
     }
 
     function _showSelected(option) {
-        $('#internship_form, #job_form').hide();
+        $('#internship_form, #job_form, #freelance_form').hide();
         switch (option) {
             case '0':
                 break;
@@ -326,18 +333,18 @@
         _showSelectedType(iam_type);
     }
     function _showSelectedType(option) {
-        $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, .current_ctc').hide();
-        $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', false);
+        $('.xcompany, .experience, .experience_in, .currently_working, .current_designation, .current_ctc').hide();
+        $('input[name=xcompany],input[name=experience_in],input[name=current_designation],input[name=currently_working],input[name=current_designation],input[name=current_ctc]').attr('required', false);
         if (apply_for == 1) {
             switch (option) {
                 case '0':
                     break;
                 case '1':
-                    $('input[name=xcompany],input[name=current_designation]').attr('required', false);
+                    $('#internship_form').find('input[name=xcompany],input[name=current_designation]').attr('required', false);
                     break;
                 case '2':
-                    $('.xcompany, .expericence, .experence_in,.current_designation').show();
-                    $('input[name=xcompany],input[name=current_designation]').attr('required', true);
+                    $('#internship_form').find('.xcompany, .experience, .experience_in,.current_designation').show();
+                    $('#internship_form').find('input[name=xcompany],input[name=current_designation]').attr('required', true);
                     break;
             }
         } else if (apply_for == 2) {
@@ -345,25 +352,29 @@
                 case '0':
                     break;
                 case '1':
-                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_ctc]').attr('required', false);
+                    $('#job_form').find('input[name=xcompany],input[name=experience_in],input[name=current_designation],input[name=currently_working],input[name=current_ctc]').attr('required', false);
                     break;
                 case '2':
-                    $('.xcompany, .expericence, .experence_in, .currently_working, .current_designation, .current_ctc, .expected_ctc').show();
-                    $('input[name=xcompany],input[name=experence_in],input[name=current_designation],input[name=currently_working],input[name=current_ctc],input[name=expected_ctc]').attr('required', true);
+                    $('#job_form').find('.xcompany, .experience, .experience_in, .currently_working, .current_designation, .current_ctc, .expected_ctc').show();
+                    $('#job_form').find('input[name=xcompany],input[name=experience_in],input[name=current_designation],input[name=currently_working],input[name=current_ctc],input[name=expected_ctc]').attr('required', true);
                     break;
             }
         }
 
     }
     document.body.onload = function () {
+        $('body,html').animate({ scrollTop: 400 }, 1000);
         $('#iam_type').prop('selectedIndex', 0);
         $('#apply_for').prop('selectedIndex', 0);
         iam_type = $('#iam_type').val();
         apply_for = $('#apply_for').val();
         _showSelectedType(iam_type)
         _showSelected(apply_for);
-        for (let i = 0; i < 15; i++) {
-            $('select[name=expericence]').append(`<option value="${i}">${i} Years</option>`)
+        for (let i = 0; i <= 20; i++) {
+            $('.experience_y').append(`<option value="${i}">${i} Years</option>`)
+        }
+        for (let i = 0; i < 12; i++) {
+            $('.experience_m').append(`<option value="${i}">${i} Months</option>`)
         }
         // on change event
         $('#apply_for').change(function () {
@@ -379,13 +390,13 @@
 
         $('input[name=currently_working]').change(function () {
             if ($(this).val() == 0) {
-                $('input[name=xcompany]').attr('placeholder', 'Last Company');
-                $('input[name=current_designation]').attr('placeholder', 'Last Designation');
-                $('input[name=current_ctc]').attr('placeholder', 'Last Salary (CTC)');
+                $('#job_form').find('input[name=xcompany]').attr('placeholder', 'Last Company');
+                $('#job_form').find('input[name=current_designation]').attr('placeholder', 'Last Designation');
+                $('#job_form').find('input[name=current_ctc]').attr('placeholder', 'Last Salary (CTC)');
             } else if ($(this).val() == 1) {
-                $('input[name=xcompany]').attr('placeholder', 'Current Company');
-                $('input[name=current_designation]').attr('placeholder', 'Current Designation');
-                $('input[name=current_ctc]').attr('placeholder', 'Current Salary (CTC)');
+                $('#job_form').find('input[name=xcompany]').attr('placeholder', 'Current Company');
+                $('#job_form').find('input[name=current_designation]').attr('placeholder', 'Current Designation');
+                $('#job_form').find('input[name=current_ctc]').attr('placeholder', 'Current Salary (CTC)');
             }
         })
 
@@ -495,7 +506,7 @@
         }
         function step321() {
             $('#section-title').text("Step 1 ")
-            $('.common_input, #internship_form, #job_form, #freelance_form').hide();
+            $('.common_input, #internship_form, #job_form, #otp_form, #freelance_form').hide();
             $('#entry_form').show();
             $('#entry_form, #internship_form, #job_form, #otp_form, #freelance_form').trigger('reset');
             $('#iam_type').prop('selectedIndex', 0);
