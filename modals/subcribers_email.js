@@ -4,7 +4,7 @@ const assert = require('assert');
 const uri = "mongodb://127.0.0.1:27017/";
 // const client = new MongoClient(uri);
 const db_name = 'onxcy_resume';
-const collection = 'resumes';
+const collection = 'subcribers_email';
 const option = { useNewUrlParser: true, useUnifiedTopology: true }
 
 const insert = (params) => {
@@ -13,6 +13,7 @@ const insert = (params) => {
         MongoClient.connect(uri, option).then(async (db) => {
             var dbo = db.db(db_name);
             try {
+                console.log('collections',collection);
                 const result = await dbo.collection(collection).insertOne(data);
                 console.log("enterd");
                 resolve({ status: 200, body: result.result })

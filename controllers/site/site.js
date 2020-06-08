@@ -132,9 +132,9 @@ router.post("/resume", async (req, res) => {
                     let filename = `${params.email}-${req.file.filename}`
 
                     let fsFile = fs.readFileSync(`${ROOT_DIR}/resumes/${req.file.filename}`);
-                    
+
                     var result = await s3.putObject(fsFile, filename);
-                    
+
                     if (result.status == 200) {
                         let list = await resume.fetch(filter)
                         params.filename = filename;
@@ -163,6 +163,42 @@ router.get("/policy", async (req, res) => {
     var body = await ejs.renderFile('views/policy/index.ejs');
 
     res.render('body', { header: header, body: body, footer: footer });
-})
+});
+
+router.post("/subcribeNewFeed", async (req, res) => {
+    if (Object.keys(req.body).length > 0) {
+        try {
+            let params = req.body;
+            if (params.subsEmail) {
+                params.email = params.subsEmail;
+
+
+                delete params.subsEmail;
+                const subcribeNewFeed = require(ROOT_DIR + '/modals/subcribers_email');
+
+                isfound = await subcribeNewFeed.fetch({ email: params.email })
+
+                if (isfound.body.length > 0) {
+                    return res.send({ status: 304, message: "This is Email already subcribered" });;
+                }
+                
+                params.isSubcribed = 1;
+                // generatting otp for verification
+
+                result = await subcribeNewFeed.insert(params);
+
+                if (result.status == 200) {
+                    res.send({ status: 200, message: "Thnak you for Subcribing us" });
+                }
+                else res.send({ status: 500, message: "Something Went Wrong please try again" });
+            }
+        } catch (error) {
+            result = error;
+            console.log(result);
+            res.send({ status: 304, message: "plases try again" });
+        }
+    }
+
+});
 
 module.exports = router;

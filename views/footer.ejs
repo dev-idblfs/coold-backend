@@ -7,7 +7,7 @@
                 <form id="activeNewsFeed" action="#" method=post class="row flex-fill">
                     <div class="col-lg-7 my-md-2 my-2">
                         <input type=email class="form-control text-white px-4 border-0 w-100 text-center text-md-left"
-                            placeholder="Your Email" name='subs-email' required>
+                            placeholder="Your Email" name='subsEmail' required>
                     </div>
                     <div class="col-lg-5 my-md-2 my-2">
                         <button type="submit" name=subscribe class="btn btn-primary btn-lg border-0 w-100">Subscribe
@@ -89,14 +89,44 @@
         $('#activeNewsFeed').submit(function (e) {
             e.preventDefault();
             e.stopPropagation();
-            setTimeout(() => {
-                swal({
-                    text: "Thank you for Subscribe!",
-                    icon: "success",
-                    button: false,
-                    timer: 1000
-                })
-            }, 500);
+            let data = $(this).serializeArray();
+            $.ajax({
+                type: 'POST',
+                url: '<%- base_url -%>subcribeNewFeed',
+                data: data,
+                beforeSend: function () {
+                    $('.preloader').show();
+                },
+                complete: function () {
+                    $('.preloader').hide();
+                    $('#activeNewsFeed').trigger('reset');
+                },
+                success: function (result) {
+                    if (result.status == 200) {
+                        swal({
+                            text: "Thank you for Subscribe!",
+                            icon: "success",
+                            button: false,
+                            timer: 1000
+                        })
+                    } else {
+                        swal({
+                            text: result.message,
+                            icon: "error",
+                            button: false,
+                            timer: 1000
+                        })
+                    }
+                },
+                error: function (error) {
+                    swal({
+                        text: error.messageF,
+                        icon: "error",
+                        button: false,
+                        timer: 1000
+                    })
+                }
+            });
         })
     });
 </script>
