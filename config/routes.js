@@ -1,37 +1,8 @@
 const express = require("express"),
     router = express.Router();
-// load site map yo
-router.get('/sitemap.xml', (req, res) => {
-    res.sendFile(`${ROOT_DIR}/public/sitemap.xml`);
-});
 
-router.post('/done', async (req, res) => {
-    // console.log(req.body);
-    const { exec } = require('child_process');
-    try {
-        const bat = exec('bat.bat');
-        var output = '';
-        bat.stdout.on('data', (data) => {
-            console.log(data.toString());
-            output += data;
-        });
 
-        bat.stderr.on('data', (data) => {
-            console.error(data.toString());
-            console.log('hello');
-            res.end(data);
-        });
-
-        bat.on('exit', (code) => {
-            console.log(`Child exited with code ${code}`);
-            res.send(output || "ok");
-        });
-        res.send(req.body || 'pl');
-    } catch (error) {
-        res.send(error);
-    }
-})
-// load defualt for redirect
+    // load defualt for redirect and static content
 router.use("/", require(ROOT_DIR + '/controllers/default'))
 
 // laod middlewares
