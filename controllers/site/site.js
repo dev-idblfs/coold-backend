@@ -58,7 +58,7 @@ router.get("/contact", async (req, res) => {
 router.get("/resume", async (req, res) => {
     var header = await ejs.renderFile('views/header.ejs', { css: assets.loadCSS(), base_url: CONFIG.BASE_URL });
     var footer = await ejs.renderFile('views/footer.ejs', { js: assets.loadJS(), base_url: CONFIG.BASE_URL });
-    var body = await ejs.renderFile('views/resume/index.ejs');
+    var body = await ejs.renderFile('views/resume/index.ejs', { base_url: CONFIG.BASE_URL });
 
     res.render('body', { header: header, body: body, footer: footer });
 
@@ -181,7 +181,7 @@ router.post("/subcribeNewFeed", async (req, res) => {
                 if (isfound.body.length > 0) {
                     return res.send({ status: 304, message: "This is Email already subcribered" });;
                 }
-                
+
                 params.isSubcribed = 1;
                 // generatting otp for verification
 

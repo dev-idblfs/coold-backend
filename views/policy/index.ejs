@@ -171,7 +171,7 @@
                         Information is obtained from various sources including public records sources. However, certain
                         information over a specified time period may not be reported.
                     </p>
-                    <h4 class="mb-4">
+                    <h4 class="mb-4" id="resumeSharePolicy">
                         Resume Share Policy
                     </h4 class="mb-4">
                     <p class="text-justify justify-content-center mb-5">
@@ -226,3 +226,10 @@
         </div>
     </div>
 </section>
+<script>
+    document.body.onload = function () {
+        let point = window.location.href.split('#')[1];
+        point = point ? $(`#${point}`).offset().top - 150 : 0;
+        $('body,html').animate({ scrollTop: point }, 1000);
+    };
+</script>
