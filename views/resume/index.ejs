@@ -23,7 +23,7 @@
                 <p class=subtitle>Upload Your Resume Here</p>
                 <h3 class=section-title id="section-title">Step 1</h3>
             </div>
-            <div class="col-lg-12 text-center p-0">
+            <div class="col-lg-12 text-center">
                 <form method='POST' class='row' id="entry_form">
                     <div class='col-lg-4' id="name-box">
                         <input id="terms&conditions" type="text" name="name" class="form-control mb-4"
@@ -39,7 +39,8 @@
                     </div>
                     <div class='col-lg-12 mb-4 text-center' id="terms-box">
                         <div class="custom-checkbox custom-control-inline mb-4">
-                            <input type="checkbox" name="name" class="custom-control-input" id="termsNconditions" required />
+                            <input type="checkbox" name="name" class="custom-control-input" id="termsNconditions"
+                                required />
                             <Label class="custom-control-label" for="termsNconditions">
                                 I agree to the
                                 <strong>
@@ -308,6 +309,25 @@
                 </form>
 
             </div>
+            <div class="col-lg-7 col-md-9 mx-auto" id="thankyouPage" style="display: none;" data-ddj='fade-up'>
+                <div class="lead border rounded-lg shadow p-5">
+                    <h5>Hey,</h5>
+                    <p>
+                        Thanks for connecting !! <br>
+                        We Would like to add you to our professional network on LinkedIn. <br>
+                        Please connect this page for current open Jobs & positions and for Payroll processing related
+                        <br>
+                        queries !! <br>
+                        <br>
+                    </p>
+                    <a href="https://www.linkedin.com/company/onxcy">https://www.linkedin.com/company/onxcy</a>
+                    <br>
+                    <br>
+                    <h6>
+                        Thanks & Regards !!
+                    </h6>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -378,6 +398,18 @@
         }
 
     }
+
+    function _checkCurentWorking(selected) {
+        if (selected == 0) {
+            $('#job_form').find('input[name=xcompany]').attr('placeholder', 'Last Company');
+            $('#job_form').find('input[name=current_designation]').attr('placeholder', 'Last Designation');
+            $('#job_form').find('input[name=current_ctc]').attr('placeholder', 'Last CTC (LPA)');
+        } else if (selected == 1) {
+            $('#job_form').find('input[name=xcompany]').attr('placeholder', 'Current Company');
+            $('#job_form').find('input[name=current_designation]').attr('placeholder', 'Current Designation');
+            $('#job_form').find('input[name=current_ctc]').attr('placeholder', 'Current CTC (LPA)');
+        }
+    }
     document.body.onload = function () {
         $('body,html').animate({ scrollTop: 400 }, 1000);
         $('#iam_type').prop('selectedIndex', 0);
@@ -386,6 +418,7 @@
         apply_for = $('#apply_for').val();
         _showSelectedType(iam_type)
         _showSelected(apply_for);
+        _checkCurentWorking($('input[name=currently_working]:checked').val());
         for (let i = 0; i <= 20; i++) {
             $('.experience_y').append(`<option value="${i}">${i} Years</option>`)
         }
@@ -405,16 +438,9 @@
         });
 
         $('input[name=currently_working]').change(function () {
-            if ($(this).val() == 0) {
-                $('#job_form').find('input[name=xcompany]').attr('placeholder', 'Last Company');
-                $('#job_form').find('input[name=current_designation]').attr('placeholder', 'Last Designation');
-                $('#job_form').find('input[name=current_ctc]').attr('placeholder', 'Last Salary (CTC)');
-            } else if ($(this).val() == 1) {
-                $('#job_form').find('input[name=xcompany]').attr('placeholder', 'Current Company');
-                $('#job_form').find('input[name=current_designation]').attr('placeholder', 'Current Designation');
-                $('#job_form').find('input[name=current_ctc]').attr('placeholder', 'Current Salary (CTC)');
-            }
+            _checkCurentWorking($(this).val());
         })
+
 
         $('#entry_form').submit(function (event) {
             event.preventDefault();
@@ -523,10 +549,10 @@
         function step321() {
             $('#section-title').text("Step 1 ")
             $('.common_input, #internship_form, #job_form, #otp_form, #freelance_form').hide();
-            $('#entry_form').show();
             $('#entry_form, #internship_form, #job_form, #otp_form, #freelance_form').trigger('reset');
             $('#iam_type').prop('selectedIndex', 0);
             $('#apply_for').prop('selectedIndex', 0);
+            $('#thankyouPage').show();
         }
 
     }
