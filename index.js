@@ -11,6 +11,7 @@ const robots = require('express-robots-txt');
 global.ROOT_DIR = path.resolve(__dirname);
 global.CONFIG = {};
 
+var port = process.env.PORT || 3000;
 // init express
 var app = module.exports = express()
 
@@ -42,7 +43,7 @@ app.use(cookieParse())
 
 app.use((req, res, next) => {
     const OY_ENV = process.env.NODE_ENV || 'development'
-
+   
     // load comman CONFIG
     const globalcnf = require(`${ROOT_DIR}/config/config`);
     // load conditional config
@@ -68,4 +69,4 @@ app.use((req, res, next) => {
     res.status(400).render('error/404');
 })
 
-app.listen(process.env.PORT || 3000, () => console.log(`Example app listening at ${CONFIG.BASE_URL}${process.env.PORT}`))
+app.listen(port, () => console.log(`I'm running @ ${port}`))
