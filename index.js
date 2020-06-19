@@ -25,9 +25,6 @@ app.set('view engine', 'ejs')
 
 app.use('views', express.static(path.join(__dirname, 'views')))
 
-// allow cross origin
-app.use(cors());
-
 // parse request bodies (req.body)
 app.use(express.urlencoded({ extended: true }))
 
@@ -39,11 +36,28 @@ app.use(bodyParser.json());
 
 app.use(cookieParse())
 
+
+var whitelist = ['https://onxcy.com', 'https://onxcy.com']
+var corsOptionsDelegate = function (req, callback) {
+    var corsOptions;
+    console.log(req.headers)
+    if (whitelist.indexOf(req.header('Origin')) !== -1) {
+        console.log('aa');
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+        console.log('ggg');
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+    callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+app.use(cors(corsOptionsDelegate));
+
 // global.log = require('./logs')
 
 app.use((req, res, next) => {
     const OY_ENV = process.env.NODE_ENV || 'development'
-   
+
     // load comman CONFIG
     const globalcnf = require(`${ROOT_DIR}/config/config`);
     // load conditional config
@@ -52,7 +66,7 @@ app.use((req, res, next) => {
     CONFIG = { ...globalcnf, ...conditionalcnf };
 
     CONFIG.BASE_URL = req.headers.host.match(/^localhost/) ? `http://${req.headers.host}/` : `https://${req.headers.host}/`
-    
+
     next();
 })
 
