@@ -32,7 +32,7 @@ let resume = Schema({
         type: Number,
         required: true
     }
-});
+},{ collection: __collections.ONXCY_RESUME.resumes });
 
 let subcribers_email = Schema({
     email: String,
