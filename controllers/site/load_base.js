@@ -24,6 +24,7 @@ const _loadCSS = () => {
         d: CONFIG.BASE_URL + "public/scss/venobox.css",
         e: CONFIG.BASE_URL + "public/scss/ddj.css",
         f: CONFIG.BASE_URL + "public/scss/style.min.css",
+        h: CONFIG.BASE_URL + "public/scss/static.css",
         brandIcon: CONFIG.BASE_URL + 'public/images/icon/icon.png',
         loader: CONFIG.BASE_URL + 'public/images/preloader.gif'
     }

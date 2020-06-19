@@ -34,6 +34,12 @@ const sendMail = async () => {
 }
 
 
+const rand = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+}
+
+
 module.exports = {
-    sendMail: sendMail
+    sendMail: sendMail,
+    getOtp: rand
 }
