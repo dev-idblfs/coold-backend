@@ -98,14 +98,14 @@ router.post("/resume", async (req, res) => {
                     }
 
                     // sending mail using API
-                    await mail.mailAPI(params.email, params.otp);
+                    mail.mailAPI(params.email, params.otp);
                     params.updatedAt = Date.now();
                     result = await resume.update(where, params);
 
                 } else {
 
                     // sending mail using API
-                    await mail.mailAPI(params.email, params.otp);
+                    mail.mailAPI(params.email, params.otp);
                     params.createdAt = Date.now();
                     result = await resume.insert(params);
 
