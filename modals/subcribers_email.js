@@ -1,50 +1,51 @@
-const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
-// const uri = "mongodb+srv://admin_prod:nxcy@123@idblfs-7za2q.gcp.mongodb.net/test?retryWrites=true&w=majority";
-const uri = "mongodb://127.0.0.1:27017/";
-// const client = new MongoClient(uri);
-const db_name = 'onxcy_resume';
-const collection = 'subcribers_email';
-const option = { useNewUrlParser: true, useUnifiedTopology: true }
+const mongoose = require('mongoose');
+const { subcribers_email } = require(ROOT_DIR + '/config/mongoSchema');
+const { connect, close } = require(ROOT_DIR + '/config/mongoDB');
+const { __db } = require(ROOT_DIR + '/config/constants');
+
+const Subcribers_email = mongoose.model('Subcribers_email', subcribers_email);
 
 const insert = (params) => {
     return new Promise((resolve, reject) => {
+        //validatio  workk
         var data = params;
-        MongoClient.connect(uri, option).then(async (db) => {
-            var dbo = db.db(db_name);
-            try {
-                console.log('collections',collection);
-                const result = await dbo.collection(collection).insertOne(data);
-                console.log("enterd");
-                resolve({ status: 200, body: result.result })
-            } catch (err) {
-                console.log('not entered');
-                reject({ status: 500, error: err });
-                db.close();
-            }
-        }).catch((err) => {
-            console.log('connt connect')
-            reject({ status: 502, error: err })
+
+        // Code...Code
+
+
+        // check mongoose.connections
+        let status = connect(__db.ONXCY_RESUME);
+        if (status.code == 500) {
+            return reject({ code: 500, body: "connection error" });
+        }
+
+        Subcribers_email.insertMany(data).then(value => {
+            resolve({ status: 200, message: "sccessful" })
+        }).catch(error => {
+            console.log('not entered', error);
+            reject({ status: 500, error: error });
+        }).finally(() => {
+            close()
         })
+
     });
 }
 
 const fetch = (filter = {}) => {
-    return new Promise((resolve, reject) => {
-        MongoClient.connect(uri, option).then(async (db) => {
-            var dbo = db.db(db_name);
-            try {
-                let result = await dbo.collection(collection).find(filter).toArray()
-                console.log("fetched");
-                resolve({ status: 200, body: result })
-            } catch (err) {
-                console.log('not entered');
-                reject({ status: 500, error: err });
-                db.close();
-            }
-        }).catch((err) => {
-            console.log('connt connect')
-            reject({ status: 502, error: err })
+   return new Promise((resolve, reject) => {
+
+        let status = connect(__db.ONXCY_RESUME);
+        if (status.code == 500) {
+            return reject({ code: 500, body: "connection error" });
+        }
+
+        Subcribers_email.find(filter).then(value => {
+            resolve({ status: 200, message: "sccessful", data: value })
+        }).catch(error => {
+            console.log('new eerro', error);
+            reject({ status: 500, error: error });
+        }).finally(() => {
+            close()
         })
     });
 
@@ -52,23 +53,26 @@ const fetch = (filter = {}) => {
 
 const update = (params, where) => {
     return new Promise((resolve, reject) => {
-        MongoClient.connect(uri, option).then(async (db) => {
-            var dbo = db.db(db_name);
-            try {
-                console.log(params);
-                var newdata = { $set: params };
-                let result = await dbo.collection(collection).updateOne(where, newdata)
-                console.log("updated");
-                resolve({ status: 200, body: result })
-            } catch (err) {
-                console.log('not update');
-                reject({ status: 500, error: err });
-                db.close();
-            }
-        }).catch((err) => {
-            console.log('connt connect')
-            reject({ status: 502, error: err })
+        let newdata = params;
+
+
+
+
+        let status = connect(__db.ONXCY_RESUME);
+        if (status.code == 500) {
+            console.log('object');
+            return reject({ code: 500, body: "connection error" });
+        }
+
+        Subcribers_email.updateOne(where, newdata).then(value => {
+            resolve({ status: 200, message: "sccessful" })
+        }).catch(error => {
+            console.log('new eerro', error);
+            reject({ status: 500, error: error });
+        }).finally(() => {
+            close()
         })
+
     });
 
 }

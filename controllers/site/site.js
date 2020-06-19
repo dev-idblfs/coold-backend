@@ -10,6 +10,7 @@ const multer = require('multer');
 const assets = require(`${ROOT_DIR}//controllers/site/load_base`);
 
 const fs = require('fs');
+const { getOtp } = require(ROOT_DIR + "/libraries/utils/utils");
 const mail = require(`${ROOT_DIR}/libraries/utils/mail`);
 const mailuitls = require(`${ROOT_DIR}/libraries/utils/utils`);
 
@@ -19,7 +20,6 @@ var storage = multer.diskStorage({
         cb(null, 'resumes')
     },
     filename: function (req, file, cb) {
-        console.log(file);
         cb(null, Date.now() + '-' + file.originalname)
     }
 })
@@ -73,17 +73,43 @@ router.post("/resume", async (req, res) => {
                     return res.send({ status: 200, message: "Verification mail has been sent to your Email" })
                 }
                 delete params.step;
-                isfound = await resume.fetch({ email: params.email })
-                if (isfound.body.length > 0) {
-                    return res.send({ status: 304, message: "Email Already Exists" });;
+                let where = {
+                    email: params.email,
                 }
                 params.isVerified = 0;
-                // generatting otp for verification
-                params.otp = Math.floor(100000 + Math.random() * 900000);
-                // sending mail using API
-                await mail.mailAPI(params.email, params.otp);
 
-                result = await resume.insert(params);
+                // generatting otp for verification
+                params.otp = getOtp();
+
+                isfoundList = await resume.fetch(where);
+
+                if (isfoundList.body.length > 0) {
+                    let isfound;
+                    isfoundList.body.forEach(element => {
+                        if (element['isCompleted'] && element['isCompleted'] == 1) {
+                            isfound = true;
+                        } else {
+                            isfound = false
+                        }
+                    });
+
+                    if (isfound) {
+                        return res.send({ status: 304, message: "Email Already Exists" });
+                    }
+
+                    // sending mail using API
+                    await mail.mailAPI(params.email, params.otp);
+                    params.updatedAt = Date.now();
+                    result = await resume.update(where, params);
+
+                } else {
+
+                    // sending mail using API
+                    await mail.mailAPI(params.email, params.otp);
+                    params.createdAt = Date.now();
+                    result = await resume.insert(params);
+
+                }
 
                 if (result.status == 200) {
                     res.send({ status: 200, message: "Verification mail has been sent to your Email" });
@@ -99,11 +125,19 @@ router.post("/resume", async (req, res) => {
                 }
                 delete params.step;
                 filter = {
-                    email: params.email
+                    email: params.email,
+                    isVerified: 0
                 }
                 let list = await resume.fetch(filter)
+
                 if (list.body[0].otp == params.otp && list.body[0].email == params.email) {
-                    result = await resume.update({ isVerified: 1 }, { _id: list.body[0]._id });
+                    let data = {
+                        updatedAt: Date.now(),
+                        isVerified: 1
+                    }
+
+                    result = await resume.update({ email: list.body[0].email }, data);
+
                     if (result.status == 200) {
                         return res.send({ status: 200, message: "Email Varified" });
                     }
@@ -125,11 +159,12 @@ router.post("/resume", async (req, res) => {
                     }
                     delete params.step;
                     filter = {
-                        email: params.email
+                        email: params.email,
+                        isVerified: 1
                     }
                     // setting file for upload resume for unqiue identification
                     // append email
-                    let filename = `${params.email}-${req.file.filename}`
+                    let filename = `${params.email}-${req.file.filename}`;
 
                     let fsFile = fs.readFileSync(`${ROOT_DIR}/resumes/${req.file.filename}`);
 
@@ -138,7 +173,9 @@ router.post("/resume", async (req, res) => {
                     if (result.status == 200) {
                         let list = await resume.fetch(filter)
                         params.filename = filename;
-                        result = await resume.update(params, { _id: list.body[0]._id });
+                        params.isCompleted = 1;
+
+                        result = await resume.update({ email: list.body[0].email }, params);
                         if (result.status == 200) {
                             return res.send({ status: 200, message: "Thank you For Subbmitted" });
                         }
@@ -178,7 +215,7 @@ router.post("/subcribeNewFeed", async (req, res) => {
 
                 isfound = await subcribeNewFeed.fetch({ email: params.email })
 
-                if (isfound.body.length > 0) {
+                if (isfound.data.length > 0) {
                     return res.send({ status: 304, message: "This is Email already subcribered" });;
                 }
 
