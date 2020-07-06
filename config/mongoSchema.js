@@ -22,7 +22,7 @@ let resume = Schema({
     experience_in: String,
     filename: String,
     gender: String,
-    am_type: Number,
+    iam_type: Number,
     skills: String,
     xcompany: String,
     createdAt: Date,
