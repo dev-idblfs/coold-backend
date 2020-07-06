@@ -6,7 +6,7 @@ const nodemailer = require("nodemailer");
 const mailAPI = (email, code) => {
   return new Promise(async (resolve, reject) => {
     const options = {
-      method: "GET",
+      method: "POST",
       uri: 'https://idblfs-email-sending.herokuapp.com/sendmail',
       body: {
         from: "Onxcy HR <hr@onxcy.com>",
