@@ -459,7 +459,7 @@
                         $('#otp_alert_text').text(result.message);
                         $('#otp_alert').addClass('d-block');
                         step122();
-                    } else customAlert(result.status, result.message);
+                    } else customAlert(result.status, "OTP successfully sent");
                 },
                 error: function (error) {
                 }
@@ -524,6 +524,9 @@
                     if (result.status == 200) {
                         customAlert(result.status, result.message);
                         step321();
+                        setTimeout(() => {
+                            window.location.href = 'https://www.linkedin.com/company/onxcy';
+                        }, 4000);
                     } else customAlert(result.status, result.message);
                 },
                 error: function (error) {
