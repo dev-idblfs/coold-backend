@@ -1,5 +1,6 @@
 const __db = {
     ONXCY_RESUME: "onxcy_resume",
+    ONXCY_BRANDS: "onxcy_brands",
 };
 
 const __collections = {
@@ -7,11 +8,12 @@ const __collections = {
         subcribers_email: "subcribers_email",
         resumes: "resumes",
     },
+    ONXCY_BRANDS: {
+        users: "users",
+    },
 };
-const __bucket = "onxcy/resumes";
 
 module.exports = {
     __collections: __collections,
     __db: __db,
-    __bucket,
 };

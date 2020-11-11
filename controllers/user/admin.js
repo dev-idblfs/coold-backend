@@ -1,6 +1,5 @@
 var express = require("express"),
     router = express.Router();
-const resume = require(ROOT_DIR + '/modals/test');
 
 // array to hold users
 const users = [{
@@ -17,8 +16,7 @@ router.get("/", function (req, res) {
 
 // request to get all the users
 router.get("/test", async (req, res) => {
-    await resume.insert();
-    res.send('ok');
+
 })
 
 // request to get all the users by userName
