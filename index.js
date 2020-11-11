@@ -5,6 +5,8 @@ const cors = require("cors");
 // const log = require('./logs/logger')
 const cookieParse = require("cookie-parser");
 const robots = require("express-robots-txt");
+const dotenv = require('dotenv');
+dotenv.config();
 
 // setting up global variables
 global.ROOT_DIR = path.resolve(__dirname);
@@ -43,32 +45,34 @@ app.use(cors());
 CONFIG = require(`${ROOT_DIR}/config/config`);
 
 app.use((req, res, next) => {
-    const OY_ENV = process.env.NODE_ENV || "development";
+  const OY_ENV = process.env.NODE_ENV || "development";
 
-    // load conditional config
-    const conditionalcnf = require(`${ROOT_DIR}/config/${
-        req.headers.host.match(/^localhost/) ? "development" : "production"
-    }/config`);
-    // comdine config into global variables
-    CONFIG = { ...CONFIG, ...conditionalcnf };
+  // load conditional config
+  const conditionalcnf = require(`${ROOT_DIR}/config/${
+    req.headers.host.match(/^localhost/) ? "development" : "production"
+  }/config`);
+  // comdine config into global variables
+  CONFIG = { ...CONFIG, ...conditionalcnf };
 
-    CONFIG.BASE_URL = req.headers.host.match(/^localhost/)
-        ? `http://${req.headers.host}/`
-        : `https://${req.headers.host}/`;
+  CONFIG.BASE_URL = req.headers.host.match(/^localhost/)
+    ? `http://${req.headers.host}/`
+    : `https://${req.headers.host}/`;
 
-    next();
+  next();
 });
 
 app.use(require("./config/routes"));
 
 app.use((err, req, res, next) => {
-    console.log(err);
-    // res.status(500).render('error');
-    res.send(500);
+  console.log(err);
+  // res.status(500).render('error');
+  res.send(500);
 });
 
 app.use((req, res, next) => {
-    res.status(400).render("error/404");
+  res.status(400).render("error/404");
 });
 
-app.listen(port, () => console.log(`I'm running @ ${port}`));
+app.listen(port, () =>
+  console.log(`I'm running @ ${port} env:${process.env.NODE_ENV}`)
+);
