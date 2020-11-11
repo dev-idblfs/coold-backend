@@ -5,8 +5,8 @@ const cors = require("cors");
 // const log = require('./logs/logger')
 const cookieParse = require("cookie-parser");
 const robots = require("express-robots-txt");
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 
 // setting up global variables
 global.ROOT_DIR = path.resolve(__dirname);
