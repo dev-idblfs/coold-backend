@@ -5,8 +5,8 @@ const cors = require("cors");
 // const log = require('./logs/logger')
 const cookieParse = require("cookie-parser");
 const robots = require("express-robots-txt");
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require("dotenv");
+dotenv.config();
 
 // setting up global variables
 global.ROOT_DIR = path.resolve(__dirname);
@@ -70,7 +70,12 @@ app.use((err, req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.status(400).render("error/404");
+  if (req.url.startsWith("/v1") || req.url.startsWith("/api")) {
+    console.log("URL ", req.url);
+    res.sendStatus(404);
+  } else {
+    res.status(400).render("error/404");
+  }
 });
 
 app.listen(port, () =>
