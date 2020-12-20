@@ -1,9 +1,9 @@
 var express = require("express"),
   router = express.Router();
 const { isEmpty } = require("lodash");
-const { STRINGS } = require("../../../config/constants");
-const { afterLogin } = require("../../../libraries/auth");
-const brands = require("../../../modals/brands");
+const { STRINGS } = require("../../config/constants");
+const { afterLogin } = require("../../libraries/auth");
+const brands = require("../../modals/brands");
 
 const { locals } = CONFIG;
 
@@ -52,8 +52,7 @@ router.post("/login", async (req, res) => {
       const [matched] = data;
       const { _id: id } = matched;
       //after login action performed inn this method
-      let result = afterLogin(req, res, id);
-      if (!result) throw { code: 500, message: STRINGS.someThingwrong };
+      afterLogin(req, res, id);
       response = locals.success;
       response.message = STRINGS.loggedIn;
     }

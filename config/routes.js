@@ -5,11 +5,12 @@ const express = require("express"),
 router.use("/", require(ROOT_DIR + "/controllers"));
 
 // laod middlewares
-router.use("/v1", require(ROOT_DIR + "/middlewares/base"));
-router.use("/v1", require(ROOT_DIR + "/middlewares/auth"));
 
-router.use("/v1", require("../controllers/brands"));
+router.use("/auth", require(ROOT_DIR + "/middlewares/auth"));
+router.use("/auth", require(ROOT_DIR + "/middlewares/base"));
 
-router.use("/api/brands", require("../controllers/api/brands"));
+router.use("/auth/v1", require("../controllers/v1"));
+
+router.use("/api/brands", require("../controllers/api/auth"));
 
 module.exports = router;

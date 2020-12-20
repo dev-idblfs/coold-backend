@@ -6,7 +6,6 @@ const setCookies = (req = {}, res = {}, name = "", value = "") => {
   let key = name;
   let val = value;
   res.cookie(key, val, { maxAge: 8640000, httpOnly: true }); // expaire after  10 mins
-  return getCookies(req, res, key) ? true : false;
 };
 
 const getCookies = (req = {}, res = {}, name = "") => {
@@ -21,10 +20,8 @@ const removeCookies = (req = {}, res = {}, name = "") => {
   let key = name;
   let val = getCookies(req, res, name);
   if (val) {
-    res.cookie(key, val, { maxAge: 0, httpOnly: true, expires: Date.now() });
-    return true;
+    res.cookie(key, val, { maxAge: 0, httpOnly: true });
   }
-  return false;
 };
 
 const generateAccessToken = (id) => {
