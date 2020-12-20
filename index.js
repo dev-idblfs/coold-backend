@@ -74,7 +74,7 @@ app.use((req, res, next) => {
     console.log("URL ", req.url);
     res.sendStatus(404);
   } else {
-    res.status(400).render("error/404");
+    res.status(404).render("error/404");
   }
 });
 
