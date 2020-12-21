@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-const { userSchema } = require("../../config/mongoSchema");
+const { formSchema } = require("../../config/mongoSchema");
 const { connect, close } = require("../../config/mongoDB");
 const { getAlreadyExits } = require("../../libraries/utils");
 const { __db, STRINGS } = require("../../config/constants");
 const { isEmpty } = require("lodash");
 
-const Brand = mongoose.model("Brand", userSchema);
+const Form = mongoose.model("forms", formSchema);
 
 const fetch = (params) => {
   return new Promise((resolve, reject) => {
@@ -20,7 +20,7 @@ const fetch = (params) => {
       return reject({ code: 500, message: "connection error" });
     }
 
-    Brand.find(data, (err, response) => {
+    Form.find(data, (err, response) => {
       if (err) {
         let data = { ...err };
         return reject({
@@ -46,7 +46,7 @@ const insert = (params) => {
       return reject({ code: 500, message: "connection error" });
     }
 
-    Brand.create(data, (err, response) => {
+    Form.create(data, (err, response) => {
       if (err) {
         let data = {};
         if (err.code === 11000) {
@@ -73,7 +73,7 @@ const update = (where, params) => {
       return reject({ code: 500, body: "connection error" });
     }
 
-    const result = await Brand.findOneAndUpdate(where, newdata);
+    const result = await Form.findOneAndUpdate(where, newdata);
     console.log("reponse", result);
 
     return resolve({ code: 200, body: "ok" });
