@@ -4,6 +4,7 @@ const STRINGS = {
   created: "Created Successfully!",
   updated: "Updated Successfully!",
   deleted: "Deleted Successfully!",
+  notFound: "No Data Found!",
   verified: "Verified Successfully!",
   loggedIn: "Login Successfully!",
   logouted: "Logout Successfully!",
@@ -15,7 +16,7 @@ const STRINGS = {
 
 const __db = {
   ONXCY_RESUME: "onxcy_resume",
-  ONXCY_BRANDS: "onxcy_brands",
+  ONXCY_V1: "onxcy_v1",
 };
 
 const __collections = {
@@ -23,8 +24,10 @@ const __collections = {
     subcribers_email: "subcribers_email",
     resumes: "resumes",
   },
-  ONXCY_BRANDS: {
-    brands: "brands",
+  ONXCY_V1: {
+    brands: "onxcy_brands",
+    REIMBURS: "onxcy_reimburs",
+    FORMS: "onxcy_forms",
   },
 };
 

@@ -1,7 +1,7 @@
-const { Schema } = require("mongoose");
+const { Schema, Mongoose } = require("mongoose");
 const { __collections } = CONFIG;
 
-const resume = Schema(
+const resume = new Schema(
   {
     name: String,
     email: String,
@@ -35,13 +35,15 @@ const resume = Schema(
   { collection: __collections.ONXCY_RESUME.resumes }
 );
 
-const subcribers_email = Schema(
+const subcribers_email = new Schema(
   {
     email: String,
     isSubcribed: Number,
   },
   { collection: __collections.ONXCY_RESUME.subcribers_email }
 );
+
+// mongoose user Schema
 
 const users = {
   name: { type: String, required: true },
@@ -56,12 +58,84 @@ const users = {
   updatedAt: { type: Date },
 };
 
-const userSchema = Schema(users, {
-  collection: __collections.ONXCY_BRANDS.brands,
+const userSchema = new Schema(users, {
+  collection: __collections.ONXCY_V1.brands,
 });
+
+// mongoose reimbursh Schema
+
+// const fields = new Schema({
+//   label: { type: String, required: true },
+//   name: { type: String, required: true },
+//   required: { type: Boolean, required: true },
+//   type: {
+//     type: String,
+//     required: true,
+//     enum: [
+//       "checkbox",
+//       "date",
+//       "email",
+//       "file",
+//       "number",
+//       "password",
+//       "radio",
+//       "range",
+//       "reset",
+//       "text",
+//     ],
+//   },
+// });
+
+const fields = {
+  label: { type: String, required: true },
+  name: { type: String, required: true },
+  required: { type: Boolean, required: true },
+  type: {
+    type: String,
+    required: true,
+    enum: [
+      "checkbox",
+      "date",
+      "email",
+      "file",
+      "number",
+      "password",
+      "radio",
+      "range",
+      "reset",
+      "text",
+    ],
+  },
+  option: { type: Array },
+};
+
+const form = {
+  brandId: { type: Schema.Types.ObjectId, required: true, ref: "users" },
+  mode: { type: Number, required: true },
+  name: { type: String, required: true },
+  fields: [fields],
+  onSubmit: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now() },
+  updatedAt: { type: Date },
+};
+
+const formSchema = new Schema(form, {
+  collection: __collections.ONXCY_V1.FORMS,
+});
+
+formSchema.path("fields").validate((fields) => {
+  console.log("validate", fields);
+  if (!fields) {
+    return false;
+  } else if (fields.length === 0) {
+    return false;
+  }
+  return true;
+}, "Fields needs to have at least one feature");
 
 module.exports = {
   resumes: resume,
   subcribers_email: subcribers_email,
   userSchema,
+  formSchema,
 };
