@@ -48,9 +48,7 @@ app.use((req, res, next) => {
   const OY_ENV = process.env.NODE_ENV || "development";
 
   // load conditional config
-  const conditionalcnf = require(`${ROOT_DIR}/config/${
-    req.headers.host.match(/^localhost/) ? "development" : "production"
-  }/config`);
+  const conditionalcnf = require(`${ROOT_DIR}/config/${req.headers.host.match(/^localhost/) ? "development" : "production"}/config`);
   // comdine config into global variables
   CONFIG = { ...CONFIG, ...conditionalcnf };
 
