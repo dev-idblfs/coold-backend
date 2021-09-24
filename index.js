@@ -6,6 +6,7 @@ const cors = require("cors");
 const cookieParse = require("cookie-parser");
 const robots = require("express-robots-txt");
 const dotenv = require("dotenv");
+const DB = require("./config/mongoDB");
 dotenv.config();
 
 // setting up global variables
@@ -48,9 +49,7 @@ app.use((req, res, next) => {
   const OY_ENV = process.env.NODE_ENV || "development";
 
   // load conditional config
-  const conditionalcnf = require(`${ROOT_DIR}/config/${
-    req.headers.host.match(/^localhost/) ? "development" : "production"
-  }/config`);
+  const conditionalcnf = require(`${ROOT_DIR}/config/${req.headers.host.match(/^localhost/) ? "development" : "production"}/config`);
   // comdine config into global variables
   CONFIG = { ...CONFIG, ...conditionalcnf };
 
@@ -78,6 +77,8 @@ app.use((req, res, next) => {
   }
 });
 
-app.listen(port, () =>
+
+app.listen(port, async () => {
+  await DB.connection()
   console.log(`I'm running @ ${port} env:${process.env.NODE_ENV}`)
-);
+});
