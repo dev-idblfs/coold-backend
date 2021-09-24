@@ -15,16 +15,16 @@ const STRINGS = {
 };
 
 const __db = {
-  ONXCY_RESUME: "onxcy_resume",
-  ONXCY_V1: "onxcy_v1",
+  ONXCY: "onxcy",
+  ONXCY: "onxcy",
 };
 
 const __collections = {
-  ONXCY_RESUME: {
+  ONXCY: {
     subcribers_email: "subcribers_email",
     resumes: "resumes",
   },
-  ONXCY_V1: {
+  ONXCY: {
     brands: "onxcy_brands",
     REIMBURS: "onxcy_reimburs",
     FORMS: "onxcy_forms",
