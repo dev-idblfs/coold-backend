@@ -6,8 +6,12 @@ const uri = dbString;
 const option = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
   useCreateIndex: true,
+  useFindAndModify: false,
+  autoIndex: false, // Don't build indexes
+  poolSize: 50, // Maintain up to 10 socket connections
+  auto_reconnect: true,
+
 };
 
 const connect = (dbName) => {
@@ -23,6 +27,16 @@ const connect = (dbName) => {
         reject({ code: 500, body: "Connection not stablished" });
       });
   });
+};
+
+const connection = async (dbName = 'onxcy') => {
+  let url = uri + dbName + '?retryWrites=true&w=majority' || '';
+  console.log(url)
+  try {
+    await mongoose.connect(url, option);
+  } catch (err) {
+    console.log(`Database not connected!= ${err} `);
+  }
 };
 
 const close = () => {
@@ -42,4 +56,5 @@ const close = () => {
 module.exports = {
   connect: connect,
   close: close,
+  connection
 };

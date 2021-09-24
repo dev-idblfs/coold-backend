@@ -6,6 +6,7 @@ const cors = require("cors");
 const cookieParse = require("cookie-parser");
 const robots = require("express-robots-txt");
 const dotenv = require("dotenv");
+const DB = require("./config/mongoDB");
 dotenv.config();
 
 // setting up global variables
@@ -76,6 +77,8 @@ app.use((req, res, next) => {
   }
 });
 
-app.listen(port, () =>
+
+app.listen(port, async () => {
+  await DB.connection()
   console.log(`I'm running @ ${port} env:${process.env.NODE_ENV}`)
-);
+});
