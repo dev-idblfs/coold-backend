@@ -20,7 +20,7 @@ const fetch = (params) => {
       return reject({ code: 500, message: "connection error" });
     }
 
-    Brand.find(data, (err, response) => {
+    Brand.find({ ...data }, (err, response) => {
       if (err) {
         let data = { ...err };
         return reject({
@@ -46,7 +46,7 @@ const insert = (params) => {
       return reject({ code: 500, message: "connection error" });
     }
 
-    Brand.create(data, (err, response) => {
+    Brand.create({ ...data, _id: new mongoose.Types.ObjectId }, (err, response) => {
       if (err) {
         let data = {};
         if (err.code === 11000) {

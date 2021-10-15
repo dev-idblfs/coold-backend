@@ -46,6 +46,7 @@ const subcribers_email = new Schema(
 // mongoose user Schema
 
 const users = {
+  _id: { type: String },
   name: { type: String, required: true },
   brandName: { type: String, required: true },
   email: { type: String, required: true, unique: true },

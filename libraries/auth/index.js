@@ -1,8 +1,9 @@
-const { generateAccessToken, setCookies, removeCookies } = require("../utils");
+const { generateAccessToken, setCookies, removeCookies, getCookies } = require("../utils");
 
 const afterLogin = (req, res, id) => {
   const token = generateAccessToken(id);
   setCookies(req, res, "token", token);
+  console.table(req.cookies)
 };
 
 const userlogout = (req, res) => {
