@@ -1,6 +1,7 @@
 var express = require("express"),
   router = express.Router();
 const { isEmpty } = require("lodash");
+const { responseCodes } = require("../../config/config");
 const { STRINGS } = require("../../config/constants");
 const { afterLogin } = require("../../libraries/auth");
 const brands = require("../../modals/brands");
@@ -27,12 +28,14 @@ router.post("/signup", async (req, res) => {
     let response = locals.success;
     response.body = result.body;
     response.message = STRINGS.created;
-    res.status(200).json(response);
+    response.code = responseCodes.newResourceCreated;
+    res.json(response);
   } catch (error) {
     console.log(error);
     let response = locals.error;
     response.message = error.message ? error.message : "Uncaught Error";
-    res.status(error.code || 500).json(response);
+    response.code = responseCodes.failureCode;
+    res.json(response);
   }
 });
 
@@ -47,7 +50,8 @@ router.post("/login", async (req, res) => {
     if (isEmpty(data)) {
       response = locals.error;
       response.message = STRINGS.loginIncorrect;
-      return res.status(203).json(response);
+      response.code = responseCodes.nocontent;
+      return res.json(response);
     } else {
       const [matched] = data;
       const { _id: id } = matched;
@@ -55,13 +59,17 @@ router.post("/login", async (req, res) => {
       afterLogin(req, res, id);
       response = locals.success;
       response.message = STRINGS.loggedIn;
+      response.code = responseCodes.successCode;
+
     }
-    return res.status(200).json(response);
+    return res.json(response);
   } catch (error) {
     console.log("log", error);
     let response = locals.error;
     response.message = error.message || "Uncought Error";
-    return res.status(error.code || 500).json(response);
+    response.code = responseCodes.failureCode;
+
+    return res.json(response);
   }
 });
 

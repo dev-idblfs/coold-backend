@@ -15,12 +15,12 @@ const fetch = (params) => {
     // Code...Code
 
     // check mongoose.connections
-    let status = connect(__db.ONXCY_V1);
+    let status = connect(__db.ONXCY);
     if (status.code == 500) {
       return reject({ code: 500, message: "connection error" });
     }
 
-    Brand.find(data, (err, response) => {
+    Brand.find({ ...data }, (err, response) => {
       if (err) {
         let data = { ...err };
         return reject({
@@ -41,12 +41,12 @@ const insert = (params) => {
     // Code...Code
 
     // check mongoose.connections
-    let status = connect(__db.ONXCY_V1);
+    let status = connect(__db.ONXCY);
     if (status.code == 500) {
       return reject({ code: 500, message: "connection error" });
     }
 
-    Brand.create(data, (err, response) => {
+    Brand.create({ ...data, _id: new mongoose.Types.ObjectId }, (err, response) => {
       if (err) {
         let data = {};
         if (err.code === 11000) {
@@ -68,7 +68,7 @@ const update = (where, params) => {
   return new Promise(async (resolve, reject) => {
     let newdata = params;
 
-    let status = connect(__db.ONXCY_V1);
+    let status = connect(__db.ONXCY);
     if (status.code == 500) {
       return reject({ code: 500, body: "connection error" });
     }
