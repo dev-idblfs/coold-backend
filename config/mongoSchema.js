@@ -55,12 +55,11 @@ const users = {
   confirmPassword: { type: String, required: true },
   verified: { type: Boolean, default: true },
   otp: { type: Number },
-  createdAt: { type: Date, default: Date.now() },
-  updatedAt: { type: Date },
 };
 
 const userSchema = new Schema(users, {
   collection: __collections.ONXCY.brands,
+  timestamps: true,
 });
 
 // mongoose reimbursh Schema
@@ -115,9 +114,7 @@ const form = {
   mode: { type: Number, required: true },
   name: { type: String, required: true },
   fields: [fields],
-  onSubmit: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now() },
-  updatedAt: { type: Date },
+  onSubmit: { type: String, required: true }
 };
 
 const formSchema = new Schema(form, {

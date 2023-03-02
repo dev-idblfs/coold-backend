@@ -31,9 +31,10 @@ const connect = (dbName) => {
 
 const connection = async (dbName = 'onxcy') => {
   let url = uri + dbName + '?retryWrites=true&w=majority' || '';
-  console.log(url)
   try {
-    await mongoose.connect(url, option);
+    await mongoose.connect(url, option).then(_ => {
+      console.log(`Database  connected!`);
+    })
   } catch (err) {
     console.log(`Database not connected!= ${err} `);
   }

@@ -5,7 +5,8 @@ const { responseCodes } = require("../config/constants");
 const { TOKEN_SECRET } = process.env;
 
 module.exports = async (req, res, next) => {
-  const authHeader = getCookies(req, res, "token");
+  const authHeader = req.header('Authorization');
+
   if (authHeader) {
     const token = authHeader;
     if (token === null)

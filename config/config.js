@@ -4,11 +4,11 @@ const MAIL_AUTH = {
         pass: "GoalWebsite@2020.",
     },
 };
-// const dbString = "mongodb://127.0.0.1:27017/";
-const dbString = `mongodb+srv://onxcy_node_2020:XywdDx4BJQS7TVa@cluster0.hc6sh.mongodb.net/`;
+
+const OY_ENV = process.env.NODE_ENV || "development";
 
 module.exports = {
-    dbString,
     MAIL_AUTH,
     ...require("./constants"),
+    ...require("./" + OY_ENV + "/constants"),
 };

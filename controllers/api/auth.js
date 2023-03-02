@@ -4,6 +4,7 @@ const { isEmpty } = require("lodash");
 const { responseCodes } = require("../../config/config");
 const { STRINGS } = require("../../config/constants");
 const { afterLogin } = require("../../libraries/auth");
+const { generateAccessToken } = require("../../libraries/utils");
 const brands = require("../../modals/brands");
 
 const { locals } = CONFIG;
@@ -45,6 +46,7 @@ router.post("/login", async (req, res) => {
     if (isEmpty(body)) throw { code: 403, message: "Empty Request" };
     const { email, password } = body;
     const { data } = await brands.fetch({ email, password });
+    console.log('data', data);
     let response = locals.error;
 
     if (isEmpty(data)) {
@@ -56,19 +58,21 @@ router.post("/login", async (req, res) => {
       const [matched] = data;
       const { _id: id } = matched;
       //after login action performed inn this method
-      afterLogin(req, res, id);
+      // afterLogin(req, res, id);
+      const token = generateAccessToken(id);
       response = locals.success;
       response.message = STRINGS.loggedIn;
       response.code = responseCodes.successCode;
+      response.code = responseCodes.successCode;
+      response.data = { token };
 
     }
-    return res.json(response);
+    return res.json({ ...response });
   } catch (error) {
     console.log("log", error);
     let response = locals.error;
-    response.message = error.message || "Uncought Error";
+    // response.message = error.stack || "Uncought Error";
     response.code = responseCodes.failureCode;
-
     return res.json(response);
   }
 });

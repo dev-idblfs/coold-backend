@@ -2,12 +2,12 @@ const express = require("express"),
   router = express.Router();
 
 // load defualt for redirect and static content
-router.use("/", require(ROOT_DIR + "/controllers"));
+router.use("/", require("../controllers"));
 
 // laod middlewares
 
-router.use("/auth", require(ROOT_DIR + "/middlewares/auth"));
-router.use("/auth", require(ROOT_DIR + "/middlewares/base"));
+router.use("/auth", require("../middlewares/auth"));
+router.use("/auth", require("../middlewares/base"));
 
 router.use("/auth/v1", require("../controllers/v1"));
 

@@ -7,10 +7,11 @@ const { locals } = CONFIG;
 
 const { userlogout } = require("../../libraries/auth");
 
+console.log(CONFIG);
+
 router.get("/currentUser", async (req, res) => {
   try {
     const { id } = CONFIG.brandInfo;
-
     const { data } = await brands.fetch({ _id: id });
 
     let response = locals.error;

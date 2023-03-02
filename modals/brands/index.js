@@ -2,23 +2,17 @@ const mongoose = require("mongoose");
 const { userSchema } = require("../../config/mongoSchema");
 const { connect, close } = require("../../config/mongoDB");
 const { getAlreadyExits } = require("../../libraries/utils");
-const { __db, STRINGS } = require("../../config/constants");
+const { __db, STRINGS, __collections } = require("../../config/constants");
 const { isEmpty } = require("lodash");
 
-const Brand = mongoose.model("Brand", userSchema);
+const Brand = mongoose.model(__collections.ONXCY.brands, userSchema);
 
 const fetch = (params) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     //validatio  workk
     var data = { ...params };
 
     // Code...Code
-
-    // check mongoose.connections
-    let status = connect(__db.ONXCY);
-    if (status.code == 500) {
-      return reject({ code: 500, message: "connection error" });
-    }
 
     Brand.find({ ...data }, (err, response) => {
       if (err) {

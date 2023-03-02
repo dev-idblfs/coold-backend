@@ -60,6 +60,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  console.log(req.originalUrl);
+  next()
+});
+
 app.use(require("./config/routes"));
 
 app.use((err, req, res, next) => {

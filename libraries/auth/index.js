@@ -3,7 +3,7 @@ const { generateAccessToken, setCookies, removeCookies, getCookies } = require("
 const afterLogin = (req, res, id) => {
   const token = generateAccessToken(id);
   setCookies(req, res, "token", token);
-  console.table(req.cookies)
+  console.table(req.cookies,res.cookies)
 };
 
 const userlogout = (req, res) => {

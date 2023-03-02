@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
 const { TOKEN_SECRET } = process.env;
 
