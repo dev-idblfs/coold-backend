@@ -5,7 +5,7 @@ const { getAlreadyExits } = require("../../libraries/utils");
 const { __db, STRINGS, __collections } = require("../../config/constants");
 const { isEmpty } = require("lodash");
 
-const Brand = mongoose.model(__collections.ONXCY.brands, userSchema);
+const Brand = mongoose.model(__collections.COOLD.brands, userSchema);
 
 const fetch = (params) => {
   return new Promise(async (resolve, reject) => {
@@ -35,7 +35,7 @@ const insert = (params) => {
     // Code...Code
 
     // check mongoose.connections
-    let status = connect(__db.ONXCY);
+    let status = connect(__db.COOLD);
     if (status.code == 500) {
       return reject({ code: 500, message: "connection error" });
     }
@@ -62,7 +62,7 @@ const update = (where, params) => {
   return new Promise(async (resolve, reject) => {
     let newdata = params;
 
-    let status = connect(__db.ONXCY);
+    let status = connect(__db.COOLD);
     if (status.code == 500) {
       return reject({ code: 500, body: "connection error" });
     }

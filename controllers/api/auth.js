@@ -46,7 +46,6 @@ router.post("/login", async (req, res) => {
     if (isEmpty(body)) throw { code: 403, message: "Empty Request" };
     const { email, password } = body;
     const { data } = await brands.fetch({ email, password });
-    console.log('data', data);
     let response = locals.error;
 
     if (isEmpty(data)) {

@@ -29,7 +29,7 @@ const connect = (dbName) => {
   });
 };
 
-const connection = async (dbName = 'onxcy') => {
+const connection = async (dbName = 'coold') => {
   let url = uri + dbName + '?retryWrites=true&w=majority' || '';
   try {
     await mongoose.connect(url, option).then(_ => {

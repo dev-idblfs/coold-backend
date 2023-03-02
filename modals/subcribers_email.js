@@ -14,7 +14,7 @@ const insert = (params) => {
 
 
         // check mongoose.connections
-        let status = connect(__db.ONXCY);
+        let status = connect(__db.COOLD);
         if (status.code == 500) {
             return reject({ code: 500, body: "connection error" });
         }
@@ -34,7 +34,7 @@ const insert = (params) => {
 const fetch = (filter = {}) => {
    return new Promise((resolve, reject) => {
 
-        let status = connect(__db.ONXCY);
+        let status = connect(__db.COOLD);
         if (status.code == 500) {
             return reject({ code: 500, body: "connection error" });
         }
@@ -58,7 +58,7 @@ const update = (params, where) => {
 
 
 
-        let status = connect(__db.ONXCY);
+        let status = connect(__db.COOLD);
         if (status.code == 500) {
             console.log('object');
             return reject({ code: 500, body: "connection error" });

@@ -1,6 +1,6 @@
 const MAIL_AUTH = {
     auth: {
-        user: "hr@onxcy.com",
+        user: "hr@coold.com",
         pass: "GoalWebsite@2020.",
     },
 };

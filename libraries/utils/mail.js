@@ -10,9 +10,9 @@ const mailAPI = (data, code) => {
             method: "POST",
             uri: "https://idblfs-email-sending.herokuapp.com/sendmail",
             body: {
-                from: "Onxcy HR <hr@onxcy.com>",
+                from: "Coold HR <hr@coold.com>",
                 to: email,
-                subject: "Onxcy - Verify Email",
+                subject: "Coold - Verify Email",
                 body_html: `
 										<!DOCTYPE html>
 										<html>
@@ -25,12 +25,12 @@ const mailAPI = (data, code) => {
 										<p style="text-align: left;"><span style="font-family: georgia, palatino;"><strong>Verify your email - Just one more step!</strong> </span><br><br><span style="font-family: georgia, palatino;">Kindly enter this "<strong>${code}</strong>" verification code to proceed further. </span></p>
 										<p style="text-align: left;"><span style="font-family: georgia, palatino;">We are on a mission of finding the best suitable option for job seekers, intern seekers &amp; freelancer and make your life simpler, more productive &amp; effective. This should be easy.</span><br><br><span style="font-family: georgia, palatino;">To get started, first, you need to verify the email address.&nbsp;</span></p>
 										<p style="text-align: left;"><span style="font-family: georgia, palatino;">Thanks &amp; Regards,</span></p>
-										<p style="text-align: left;"><span style="font-family: georgia, palatino;">Onxcy HR&nbsp;</span></p>
+										<p style="text-align: left;"><span style="font-family: georgia, palatino;">Coold HR&nbsp;</span></p>
 										</body>
 										</html>`,
             },
             headers: {
-                Origin: "https://www.onxcy.com",
+                Origin: "https://www.coold.com",
             },
             json: true,
         };

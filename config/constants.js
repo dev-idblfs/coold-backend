@@ -15,19 +15,19 @@ const STRINGS = {
 };
 
 const __db = {
-  ONXCY: "onxcy",
-  ONXCY: "onxcy",
+  COOLD: "coold",
+  COOLD: "coold",
 };
 
 const __collections = {
-  ONXCY: {
+  COOLD: {
     subcribers_email: "subcribers_email",
     resumes: "resumes",
   },
-  ONXCY: {
-    brands: "onxcy_brands",
-    REIMBURS: "onxcy_reimburs",
-    FORMS: "onxcy_forms",
+  COOLD: {
+    brands: "coold_brands",
+    REIMBURS: "coold_reimburs",
+    FORMS: "coold_forms",
   },
 };
 

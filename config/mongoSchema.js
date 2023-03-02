@@ -32,7 +32,7 @@ const resume = new Schema(
       required: true,
     },
   },
-  { collection: __collections.ONXCY.resumes }
+  { collection: __collections.COOLD.resumes }
 );
 
 const subcribers_email = new Schema(
@@ -40,7 +40,7 @@ const subcribers_email = new Schema(
     email: String,
     isSubcribed: Number,
   },
-  { collection: __collections.ONXCY.subcribers_email }
+  { collection: __collections.COOLD.subcribers_email }
 );
 
 // mongoose user Schema
@@ -58,7 +58,7 @@ const users = {
 };
 
 const userSchema = new Schema(users, {
-  collection: __collections.ONXCY.brands,
+  collection: __collections.COOLD.brands,
   timestamps: true,
 });
 
@@ -118,11 +118,10 @@ const form = {
 };
 
 const formSchema = new Schema(form, {
-  collection: __collections.ONXCY.FORMS,
+  collection: __collections.COOLD.FORMS,
 });
 
 formSchema.path("fields").validate((fields) => {
-  console.log("validate", fields);
   if (!fields) {
     return false;
   } else if (fields.length === 0) {

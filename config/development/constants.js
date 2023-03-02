@@ -1,4 +1,4 @@
-const __bucket = "onxcy/dev/";
+const __bucket = "coold/dev/";
 
 const dbString = "mongodb://127.0.0.1:27017/";
 

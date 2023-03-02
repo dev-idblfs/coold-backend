@@ -1,6 +1,6 @@
 var AWS = require('aws-sdk');
 
-const BUCKET = 'onxcy/resumes'
+const BUCKET = 'coold/resumes'
 const REGION = 'us-east-2'
 const ACCESS_KEY = 'AKIAIDOEAAONJ3IVHWLQ'
 const SECRET_KEY = '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'
