@@ -7,8 +7,6 @@ const { locals } = CONFIG;
 
 const { userlogout } = require("../../libraries/auth");
 
-console.log(CONFIG);
-
 router.get("/currentUser", async (req, res) => {
   try {
     const { id } = CONFIG.brandInfo;

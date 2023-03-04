@@ -4,6 +4,6 @@ const express = require("express"),
 
 router.use("/user", require("./user"));
 router.use("/reimburs", require("./reimburs"));
-router.use("/forms", require("./form"));
+router.use("/form", require("./form"));
 
 module.exports = router;

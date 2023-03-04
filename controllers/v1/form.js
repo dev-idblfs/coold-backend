@@ -5,7 +5,7 @@ const express = require("express"),
 const { locals } = CONFIG;
 const forms = require("../../modals/forms");
 
-router.get("/list", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     let response = locals.error;
 
@@ -63,7 +63,7 @@ router.get("/:id", async (req, res) => {
 
 // add new forms route
 
-router.post("/add", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { body } = req;
     const { id } = CONFIG.brandInfo;

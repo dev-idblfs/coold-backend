@@ -6,9 +6,8 @@ const { TOKEN_SECRET } = process.env;
 
 module.exports = async (req, res, next) => {
   const authHeader = req.header('Authorization');
-
   if (authHeader) {
-    const token = authHeader;
+    const token = String(authHeader).split(" ")[1];
     if (token === null)
       return res.json({
         code: responseCodes.unAuthorizedUser,
